@@ -1,7 +1,8 @@
-const pool = require('./db')
+const pool = require('../db')
 const crypto = require('crypto');
 const secret = 'dbgui3330';
 const cookieName = 'AmateurHubDt';
+const events = require('./eventRoutes');
 
 module.exports = function routes(app, logger) {
   // GET /
@@ -232,5 +233,6 @@ module.exports = function routes(app, logger) {
       }
     });
   });
+  app.use('/api', events);
 
 }
