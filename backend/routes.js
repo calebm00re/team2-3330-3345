@@ -1,4 +1,7 @@
 const pool = require('./db')
+const crypto = require('crypto');
+const secret = 'dbgui3330';
+const cookieName = 'AmateurHubDt';
 
 module.exports = function routes(app, logger) {
   // GET /
@@ -95,4 +98,68 @@ module.exports = function routes(app, logger) {
       }
     });
   });
+
+  // POST /api/createUser
+  //sign in api to create new user
+  app.post('/api/createUser', async (req, res) => {
+    // obtain a connection from our pool of connections
+    pool.getConnection(function (err, connection) {
+      if (err) {
+        // if there is an issue obtaining a connection, release the connection instance and log the error
+        logger.error('Problem obtaining MySQL connection',err)
+        res.status(400).send('Problem obtaining MySQL connection');
+      } else {
+        let firstName = req.body['firstName'];
+        let lastName = req.body['lastName'];
+        let userName = req.body['userName'];
+        let psw = req.body['psw'];
+        // let dob = req.body['dob'];
+        const hash = crypto.createHmac('sha256', secret).update(psw).digest('hex');
+        let insert = [[firstName, lastName, userName, hash]];
+        let sql1 = "SELECT userID FROM users WHERE userName ='" + userName + "'";
+
+        connection.query(sql1, function (err, rows, fields) {
+          if (err) {
+            logger.error('Error while fetching values: \n', err);
+            res.status(400).json({
+              data: [],
+              error: 'Error obtaining values'
+            });
+          } else {
+            if (rows.length == 0) {
+              let sql =
+                'INSERT INTO users(firstName, lastName, userName, psw) VALUES ?';
+              console.log(sql);
+              // if there is no issue obtaining a connection, execute query and release connection
+              connection.query(sql, [insert], function (err, rows, fields) {
+                connection.release();
+                if (err) {
+                  logger.error('Error while fetching values: \n', err);
+                  res.status(400).json({
+                    data: [],
+                    error: 'Error obtaining values'
+                  });
+                } else {
+                  let users = {
+                    name: userName,
+                    pxcd: hash
+                  };
+                  res.cookie(cookieName, users);
+                  res.status(200).json({
+                    data: rows
+                  });
+                }
+              });
+            } else {
+              //user already exists
+              res.status(400).json({
+                status: 1
+              });
+            }
+          }
+        });
+      }
+    });
+  });
+
 }

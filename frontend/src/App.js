@@ -65,13 +65,22 @@ function App () {
 
   // handle intialization and setup of database table, can reinitialize to wipe db
   const reset = () => {
-    axios.post(`http://${url}:8000/reset`).then(res => {
+    axios.post(`http://${url}:8000/signup`).then(res => {
       console.log(res);
       fetchVals();
     }).catch(err => {
       console.log(err)
     });;
   }
+  
+  // const signUp = () => {
+  //   axios.post(`http://${url}:8000/reset`).then(res => {
+  //     console.log(res);
+  //     fetchVals();
+  //   }).catch(err => {
+  //     console.log(err)
+  //   });;
+  // }
 
   // tell app to fetch values from db on first load (if initialized)
   useEffect(() => {
