@@ -1,0 +1,33 @@
+
+
+.logo-button {
+    text-decoration: none;
+    color: white;
+}
+.nav {
+    height: auto;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 84rem;
+    justify-content: space-between;
+}
+
+.nav-menu {
+    display: flex;
+    margin-left: auto;
+}
+.nav-menu > * {
+    margin-left: 0.5rem;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .nav-container {
+        padding: none;
+    }
+
+}

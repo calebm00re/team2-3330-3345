@@ -1,0 +1,56 @@
+
+
+.landing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+}
+
+.landing-content {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* min-width: 600px; */
+}
+
+.landing-title {
+    font-size: 4rem;
+}
+
+.landing-subtitle {
+    font-size: 1.25rem;
+}
+
+.landing-image {
+    max-width: 100%;
+}
+
+.text-color-red {
+    color: #FF6565;
+}
+
+.landing-button {
+    background: linear-gradient(91.25deg, rgba(255, 138, 0, 0.9) 12.95%, rgba(106, 35, 255, 0.9) 98.95%); 
+}
+
+.landing-button:hover {
+    background: linear-gradient(91.25deg, rgba(192, 102, 0, 0.9) 12.95%, rgba(73, 22, 184, 0.9) 98.95%); 
+}
+
+@media only screen and (max-width: 600px) {
+
+    .landing-grid {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+    }
+
+    .landing-content {
+
+        align-items: center;
+    }
+
+
+}
