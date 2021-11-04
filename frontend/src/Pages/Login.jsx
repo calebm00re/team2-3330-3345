@@ -5,7 +5,7 @@ function Login () {
 
 
     return (
-        <div className="section">
+        <section>
             <div className="container form-container">
                 <form name="loginForm" onSubmit="" className="form">
                     <div className="form-header">
@@ -26,7 +26,7 @@ function Login () {
                     <a className="form-tail-text-link" href="/signup">Don't have an account? <span className="link-color">Create one</span></a>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }
 

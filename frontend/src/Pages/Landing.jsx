@@ -4,7 +4,7 @@ import LandingImage from '../Assets/landing-image.svg'
 function Landing () {
 
     return (
-        <div className="section">
+        <section>
             <div className="container">
                 <div className="landing-grid">
                     <div className="landing-content">
@@ -15,7 +15,7 @@ function Landing () {
                     <img className="landing-image"  src={LandingImage}></img>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }
 

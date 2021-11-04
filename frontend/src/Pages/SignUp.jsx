@@ -5,7 +5,7 @@ function SignUp () {
     const closeModal = (props) => { return props.onClick }
 
   return (
-    <div className="section">
+    <section>
         <div className="container form-container">
             <form name="signUpForm" onSubmit="" className="form">
                 <div className="form-header">
@@ -35,7 +35,7 @@ function SignUp () {
                 <a className="form-tail-text-link" href="/login">Already have an account? <span className="link-color">Login</span></a>
             </div>
         </div>
-    </div>
+    </section>
   );
 }
 

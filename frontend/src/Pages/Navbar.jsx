@@ -4,7 +4,7 @@ import logo from '../Assets/Logo.svg'
 function Navbar () {
 
     return (
-        <section className="nav section" id="nav">
+        <section className="nav" id="nav">
             <div className="container nav-container">
                 <a id="logo" className="logo-button" href="/">
                     <img src={logo}></img>
