@@ -10,15 +10,15 @@ router.post("/createEvent", async (req, res) => {
         logger.error("Problem obtaining MySQL connection", err);
         res.status(400).send("Problem obtaining MySQL connection");
       } else {
-        let eventName = req.body['Event_Name'];
-        let eventLocation = req.body['Event_Location'];
-        let eventGenre = req.body['Event_Genre'];
-        let eventDescription = req.body['Event_Description'];
-        let eventDate = req.body['Event_Date'];
-        let eventTime = req.body['Event_Time'];
+        let eventName = req.body['eventName'];
+        let eventLocation = req.body['eventLocation'];
+        let eventGenre = req.body['eventGenre'];
+        let eventDescription = req.body['eventDescription'];
+        let eventDate = req.body['eventDate'];
+        let eventTime = req.body['eventTime'];
     // if there is no issue obtaining a connection, execute query
         connection.query(
-          "INSERT INTO events(Event_Name, Event_Location, Event_Genre, Event_Description, Event_Date, Event_Time) VALUES(?,?,?,?,?,?)",
+          "INSERT INTO events(eventName, eventLocation, eventGenre, eventDescription, eventDate, eventTime) VALUES(?,?,?,?,?,?)",
           [eventName, eventLocation, eventGenre, eventDescription, eventDate, eventTime],
           (err, rows, fields) => {
             if (err) {
@@ -48,12 +48,11 @@ router.post("/createEvent", async (req, res) => {
         logger.error("Problem obtaining MySQL connection", err);
         res.status(400).send("Problem obtaining MySQL connection");
       } else {
-        let eventName = req.body['Event_Name'];
-        let eventDate = req.body['Event_Date'];
+        let eventName = req.body['eventName'];
     // if there is no issue obtaining a connection, execute query
         connection.query(
-          "DELETE FROM events WHERE Event_Name = ? &&  Event_Date = ?",
-          [eventName, eventDate],
+          "DELETE FROM events WHERE eventName = ?",
+          [eventName],
           (err, rows, fields) => {
             if (err) {
               logger.error("Error while deleting event\n", err);
@@ -82,22 +81,22 @@ router.post("/createEvent", async (req, res) => {
         logger.error("Problem obtaining MySQL connection", err);
         res.status(400).send("Problem obtaining MySQL connection");
       } else {
-        let eventNameOld = req.body['Event_Name_Old'];
-        let eventLocationOld = req.body['Event_Location_Old'];
-        let eventGenreOld = req.body['Event_Genre_Old'];
-        let eventDescriptionOld = req.body['Event_Description_Old'];
-        let eventDateOld = req.body['Event_Date_Old'];
-        let eventTimeOld = req.body['Event_Time_Old'];
-        let eventNameNew = req.body['Event_Name_New'];
-        let eventLocationNew = req.body['Event_Location_New'];
-        let eventGenreNew = req.body['Event_Genre_New'];
-        let eventDescriptionNew = req.body['Event_Description_New'];
-        let eventDateNew = req.body['Event_Date_New'];
-        let eventTimeNew = req.body['Event_Time_New'];
+        let eventNameOld = req.body['eventNameOld'];
+        let eventLocationOld = req.body['eventLocationOld'];
+        let eventGenreOld = req.body['eventGenreOld'];
+        let eventDescriptionOld = req.body['eventDescriptionOld'];
+        let eventDateOld = req.body['eventDateOld'];
+        let eventTimeOld = req.body['eventTimeOld'];
+        let eventNameNew = req.body['eventNameNew'];
+        let eventLocationNew = req.body['eventLocationNew'];
+        let eventGenreNew = req.body['eventGenreNew'];
+        let eventDescriptionNew = req.body['eventDescriptionNew'];
+        let eventDateNew = req.body['eventDateNew'];
+        let eventTimeNew = req.body['eventTimeNew'];
         
     // if there is no issue obtaining a connection, execute query
         connection.query(
-          "UPDATE events SET Event_Name = ?,Event_Location = ?,Event_Genre = ?,Event_Description = ?,Event_Date = ?,Event_Time = ? WHERE Event_Name = ? && Event_Location = ? && Event_Genre = ? && Event_Description = ? && Event_Date = ? && Event_Time = ?",
+          "UPDATE events SET eventName = ?,eventLocation = ?,eventGenre = ?,eventDescription = ?,eventDate = ?,eventTime = ? WHERE eventName = ? && eventLocation = ? && eventGenre = ? && eventDescription = ? && eventDate = ? && eventTime = ?",
           [eventNameNew,eventLocationNew,eventGenreNew,eventDescriptionNew,eventDateNew,eventTimeNew, eventNameOld,eventLocationOld,eventGenreOld,eventDescriptionOld,eventDateOld,eventTimeOld],
           (err, rows, fields) => {
             if (err) {
