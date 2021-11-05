@@ -2,7 +2,7 @@ import '../Styles/Form.css';
 import {signup} from '../utils/utils';
 import '../Styles/Form.css';
 import React, {useContext, useState, useEffect } from 'react';
-import { UserRepository } from '../api/userRepository';
+// import { UserRepository } from '../api/userRepository';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 
@@ -11,6 +11,7 @@ function SignUp () {
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const history = useHistory();
 
   // ENTER YOUR EC2 PUBLIC IP/URL HERE
   const ec2_url = ''
@@ -26,6 +27,7 @@ function SignUp () {
         }).catch(err => {
           console.log(err)
         });;
+        history.push('/home')
     }
         
   return (
