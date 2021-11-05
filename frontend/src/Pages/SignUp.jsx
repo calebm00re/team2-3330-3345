@@ -1,8 +1,15 @@
 import '../Styles/Form.css';
+import {signup} from '../utils/utils';
 
 function SignUp () {
 
     const closeModal = (props) => { return props.onClick }
+    
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     var values = {}
+    //     signup(values)
+    // }
 
   return (
     <section>
