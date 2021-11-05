@@ -10,16 +10,16 @@ function SignUp () {
     const [lastName, setLastName] = useState('');
     const history = useHistory();
 
-  const ec2_url = ''
-  const ec2 = false;
-  const url = ec2 ? ec2_url : 'localhost'
+    const ec2_url = ''
+    const ec2 = false;
+    const url = ec2 ? ec2_url : 'localhost'
 
     const register = (e) => {
         e.preventDefault();
         axios.post(`http://${url}:8000/api/createUser`, {userName: userName, psw: password, firstName: firstName, lastName: lastName}).then(res => {
-          console.log(res);
+            console.log(res);
         }).catch(err => {
-          console.log(err)
+            console.log(err)
         });;
         history.push('/home')
     }
