@@ -1,8 +1,5 @@
 import '../Styles/Form.css';
-import {signup} from '../utils/utils';
-import '../Styles/Form.css';
-import React, {useContext, useState, useEffect } from 'react';
-// import { UserRepository } from '../api/userRepository';
+import React, {useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 
@@ -13,11 +10,8 @@ function SignUp () {
     const [lastName, setLastName] = useState('');
     const history = useHistory();
 
-  // ENTER YOUR EC2 PUBLIC IP/URL HERE
   const ec2_url = ''
-  // CHANGE THIS TO TRUE IF HOSTING ON EC2, MAKE SURE TO ADD IP/URL ABOVE
   const ec2 = false;
-  // USE localhost OR ec2_url ACCORDING TO ENVIRONMENT
   const url = ec2 ? ec2_url : 'localhost'
 
     const register = (e) => {
