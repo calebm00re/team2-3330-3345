@@ -5258,6 +5258,11 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
+goober@2.0.41:
+  version "2.0.41"
+  resolved "https://registry.npmjs.org/goober/-/goober-2.0.41.tgz"
+  integrity sha512-kwjegMT5018zWydhOQlQneCgCtrKJaPsru7TaBWmTYV0nsMeUrM6L6O8JmNYb9UbPMgWcmtf+9p4Y3oJabIH1A==
+
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4:
   version "4.2.8"
   resolved "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.8.tgz"
@@ -9007,6 +9012,13 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-multistep@^5.2.6:
+  version "5.2.6"
+  resolved "https://registry.npmjs.org/react-multistep/-/react-multistep-5.2.6.tgz"
+  integrity sha512-3W1XGsj0nlv16qi7maePPV6Z1pS3qSlbgwjANMLUvA61Ou4E9qVZq0DvTpxjQ15tBDH8rO2Jd+iZmdef3+SLIQ==
+  dependencies:
+    goober "2.0.41"
 
 react-refresh@^0.8.3:
   version "0.8.3"
