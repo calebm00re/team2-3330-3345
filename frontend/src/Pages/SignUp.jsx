@@ -18,10 +18,11 @@ function SignUp () {
         e.preventDefault();
         axios.post(`http://${url}:8000/api/createUser`, {userName: userName, psw: password, firstName: firstName, lastName: lastName}).then(res => {
             console.log(res);
+            history.push('/onboarding')
         }).catch(err => {
             console.log(err)
+            document.getElementById("form-error").style.display = "block";
         });;
-        history.push('/home')
     }
         
   return (
@@ -61,10 +62,13 @@ function SignUp () {
                             onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
+                <div id="form-error">
+                    Something went wrong
+                </div>
                 <button type="submit" className="form-button" value="Submit">Signup</button>
             </form>
             <div className="form-tail" >
-                <a className="form-tail-text-link" href="/login">Already have an account? <span className="link-color">Login</span></a>
+                <a className="form-tail-text-link">Already have an account? <span className="link-color">Login</span></a>
             </div>
         </div>
     </section>

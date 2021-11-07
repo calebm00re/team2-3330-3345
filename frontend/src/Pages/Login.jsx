@@ -17,10 +17,11 @@ function Login () {
         e.preventDefault();
         axios.post(`http://${url}:8000/api/login`, {userName: userName, psw: password}).then(res => {
             console.log(res);
+            history.push('/home')
         }).catch(err => {
             console.log(err)
+            document.getElementById("form-error").style.display = "block";
         });;
-        history.push('/home')
     }
 
     return (
@@ -45,10 +46,13 @@ function Login () {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
+                    <div id="form-error">
+                        Invalid email and password combination
+                    </div>
                     <button type="submit" className="form-button" value="Submit">Login</button>
                 </form>
                 <div className="form-tail" >
-                    <a className="form-tail-text-link" href="/signup">Don't have an account? <span className="link-color">Create one</span></a>
+                    <a className="form-tail-text-link">Don't have an account? <span className="link-color">Create one</span></a>
                 </div>
             </div>
         </section>

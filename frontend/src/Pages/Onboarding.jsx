@@ -56,7 +56,7 @@ const steps = [
 const OnboardingPage = () => {
     return(
         <>
-            <NavBar isLoggedIn={true} />
+            {/* <NavBar isLoggedIn={true} /> */}
 
             <section className="onboarding-section">
                 <div className="container">

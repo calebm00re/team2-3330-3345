@@ -95,3 +95,12 @@
     grid-column-gap: 16px;
     grid-row-gap: 0px;
 }
+
+#form-error {
+    display: none;
+    background-color: rgb(255, 204, 195);
+    color: red;
+    padding: 1rem;
+    text-align: center;
+  }
+  
