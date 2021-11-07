@@ -52,7 +52,7 @@ function Login () {
                     <button type="submit" className="form-button" value="Submit">Login</button>
                 </form>
                 <div className="form-tail" >
-                    <a className="form-tail-text-link">Don't have an account? <span className="link-color">Create one</span></a>
+                    <a className="form-tail-text-link" href="/signup">Don't have an account? <span className="link-color">Create one</span></a>
                 </div>
             </div>
         </section>
