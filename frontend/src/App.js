@@ -12,7 +12,7 @@ import Landing from './Pages/Landing.jsx';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Home from './Pages/Home';
-
+import OnboardingPage from './Pages/Onboarding';
 
 // React functional component
 function App () {
@@ -101,6 +101,9 @@ function App () {
           </Route>
           <Route exact path="/signup">
             <SignUp />
+          </Route>
+          <Route exact path="/onboarding">
+            <OnboardingPage />
           </Route>
           {/* <Route exact path="/home">
             <SignUp />
