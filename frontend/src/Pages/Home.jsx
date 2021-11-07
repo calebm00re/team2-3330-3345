@@ -4,16 +4,16 @@ import '../Styles/Home.css';
 function Home () {
 
     return (
-        <>
+        <section>
             <div className="container">
-                <div className="landing_grid">
-                    <div className="landing_content">
-                        <h1 className="landing_title">Home</h1>
-                        <h2 className="landing_subtitle">Where the logged in user goes</h2>
+                <div className="landing-grid">
+                    <div className="landing-content">
+                        <h1 className="landing-title">Home</h1>
+                        <h2 className="landing-subtitle">Where the logged in user goes</h2>
                     </div>
                 </div>
             </div>
-        </>
+        </section>
     );
 }
 

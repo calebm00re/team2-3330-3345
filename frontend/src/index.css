@@ -1,3 +1,9 @@
+
+@font-face {
+  font-family: Futura;
+  src: url(./Assets/Futura.ttc);
+}
+
 body {
   margin: 0;
   font-family: "Futura";
@@ -18,4 +24,5 @@ code {
 }
 
 #root {
+  
 }

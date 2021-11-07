@@ -25,7 +25,7 @@ function SignUp () {
     }
         
   return (
-    <div className="section">
+    <section>
         <div className="container form-container">
             <form name="signUpForm" onSubmit={register} className="form">
                 <div className="form-header">
@@ -67,7 +67,7 @@ function SignUp () {
                 <a className="form-tail-text-link" href="/login">Already have an account? <span className="link-color">Login</span></a>
             </div>
         </div>
-    </div>
+    </section>
   );
 }
 
