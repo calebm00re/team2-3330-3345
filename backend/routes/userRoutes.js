@@ -18,7 +18,7 @@ router.post("/createUser", async (req, res) => {
         let userGender = req.body['userGender'];
     // if there is no issue obtaining a connection, execute query
         connection.query(
-          "INSERT INTO events(userFirstName, userLastName, userName, userPassword, userBirthday, userGender) VALUES(?,?,?,?,?,?)",
+          "INSERT INTO users(userFirstName, userLastName, userName, userPassword, userBirthday, userGender) VALUES(?,?,?,?,?,?)",
           [userFirstName, userLastName, userName, userPassword, userBirthday, userGender],
           (err, rows, fields) => {
             if (err) {
