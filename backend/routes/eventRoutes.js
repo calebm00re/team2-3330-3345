@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
+//Create event route
 router.post("/createEvent", async (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) {
@@ -23,6 +24,72 @@ router.post("/createEvent", async (req, res) => {
           (err, rows, fields) => {
             if (err) {
               logger.error("Error while posting event\n", err);
+              res.status(400).json({
+                data: [],
+                error: "Error obtaining values",
+              });
+            } else {
+              res.status(200).json({
+                data: rows,
+              });
+            }
+          }
+        );
+      }
+      connection.release();
+    });
+  });
+
+//Get list of events route
+router.get("/Events", async (req, res) => {
+  pool.getConnection((err, connection) => {
+      if (err) {
+      console.log(connection);
+      // if there is an issue obtaining a connection, release the connection instance and log the error
+      logger.error("Problem obtaining MySQL connection", err);
+      res.status(400).send("Problem obtaining MySQL connection");
+    } else {
+  // if there is no issue obtaining a connection, execute query
+      connection.query(
+        "SELECT * FROM events" ,
+        (err, rows, fields) => {
+          if (err) {
+            logger.error("Error while getting events\n", err);
+            res.status(400).json({
+              data: [],
+              error: "Error obtaining values",
+            });
+          } else {
+            res.status(200).json({
+              data: rows,
+            });
+          }
+        }
+      );
+    }
+    connection.release();
+  });
+});
+
+
+  //Get specific event route
+  router.get("/Event", async (req, res) => {
+    pool.getConnection((err, connection) => {
+        if (err) {
+        console.log(connection);
+        // if there is an issue obtaining a connection, release the connection instance and log the error
+        logger.error("Problem obtaining MySQL connection", err);
+        res.status(400).send("Problem obtaining MySQL connection");
+      } else {
+        let eventName = req.body['eventName'];
+        
+    // if there is no issue obtaining a connection, execute query
+        connection.query(
+          "SELECT * FROM events WHERE eventName = ?",
+          [eventName],
+          (err, rows, fields) => {
+            if (err) {
+              logger.error("Error while getting event\n", err);
               res.status(400).json({
                 data: [],
                 error: "Error obtaining values",
