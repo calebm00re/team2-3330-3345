@@ -1,0 +1,28 @@
+.sidebar {
+    position: fixed;
+    left: 0;
+    height: 96vh;
+    padding: 1rem;
+}
+
+.emojiIcon {
+    margin-left: 0.3rem;
+}
+
+.container-sidebar {
+    margin: 0rem 2rem 0rem 21rem;
+}
+
+.pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout ul {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar-spacer {
+    flex-grow: 1;
+}
+
+.pro-menu {
+    height: 100%;
+}

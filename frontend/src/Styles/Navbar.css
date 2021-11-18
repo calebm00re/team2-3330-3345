@@ -1,4 +1,6 @@
-
+.logo {
+    max-width: 10rem;
+}
 
 .logo-button {
     text-decoration: none;

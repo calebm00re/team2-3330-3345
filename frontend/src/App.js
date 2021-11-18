@@ -8,11 +8,14 @@ import PrivateRoute from './utils/PrivateRoute';
 
 
 import Navbar from './Pages/Navbar';
+import { Sidebar } from './Pages/Sidebar';
 import Landing from './Pages/Landing.jsx';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Home from './Pages/Home';
 import OnboardingPage from './Pages/Onboarding';
+import BrowsePage from './Pages/Browse';
+import ProfilePage from './Pages/ProfileViews';
 
 // React functional component
 function App () {
@@ -89,27 +92,36 @@ function App () {
 
   return (
     <>
-    <Navbar />
     <main className="app-content">
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
+            <Navbar />
             <Landing />
           </Route>
           <Route exact path="/login">
+            <Navbar />
             <Login />
           </Route>
           <Route exact path="/signup">
+            <Navbar />
             <SignUp />
           </Route>
           <Route exact path="/onboarding">
+            <Navbar />
             <OnboardingPage />
           </Route>
-          {/* <Route exact path="/home">
-            <SignUp />
-          </Route> */}
           <PrivateRoute path="/home">
+            <Sidebar />
               <Home />
+          </PrivateRoute>
+          <PrivateRoute path="/profile">
+            <Sidebar />
+              <ProfilePage />
+          </PrivateRoute>
+          <PrivateRoute path="/browse">
+            <Sidebar />
+              <BrowsePage />
           </PrivateRoute>
         </Switch>
       </BrowserRouter>

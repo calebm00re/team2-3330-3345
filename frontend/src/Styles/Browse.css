@@ -1,0 +1,67 @@
+.browse-section {
+    padding: 0rem 0rem;
+}
+.browse-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    position: sticky;
+    top: 1rem;
+    background-color: #232323;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.browse-grid {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 2rem;
+}
+
+
+.event-page {
+    background-color: #232323;
+    padding: 1rem 2rem 2rem 2rem;
+    border-radius: 0.5rem;
+    width: auto;
+}
+
+.event-card {
+    background-color: #232323;
+    padding: 1rem 2rem 2rem 2rem;
+    border-radius: 0.5rem;
+    width: 20rem;
+}
+
+.image-overlay {}
+
+.card-header-info {}
+
+.event-img {}
+
+.event-title {}
+
+.event-subtitle {
+    color: gray;
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+}
+.card-tags > * {
+    padding: 0.5rem 1rem;
+    background-color: indigo;
+    border-radius: 5rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.card-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    margin-top: 1rem;
+}

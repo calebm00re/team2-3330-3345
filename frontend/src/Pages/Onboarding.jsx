@@ -1,6 +1,5 @@
 // from https://github.com/srdjan/react-multistep
 
-import NavBar from "./Navbar";
 import Multistep from 'react-multistep';
 
 import '../Styles/Form.css'
