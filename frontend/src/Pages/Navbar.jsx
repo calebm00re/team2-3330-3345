@@ -1,5 +1,5 @@
 import '../Styles/Navbar.css'
-import logo from '../Assets/Logo.svg'
+import logo from '../Assets/Logo.png'
 
 function Navbar () {
 
@@ -7,7 +7,7 @@ function Navbar () {
         <section className="nav" id="nav">
             <div className="container nav-container">
                 <a id="logo" className="logo-button" href="/">
-                    <img src={logo}></img>
+                    <img className="logo" src={logo} alt="logo"></img>
                 </a>
                 <div className="nav-menu">
                     <a id="login-btn" className="button button-secondary" href="/login">

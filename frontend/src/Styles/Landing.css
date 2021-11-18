@@ -18,6 +18,11 @@
     font-size: 4rem;
 }
 
+.typing-text {
+
+    display: inline;
+}
+
 .landing-subtitle {
     font-size: 1.25rem;
 }
@@ -27,15 +32,18 @@
 }
 
 .text-color-red {
-    color: #FF6565;
+    background: linear-gradient(91.25deg, rgba(255, 138, 0, 0.9) 12.95%, rgba(130, 72, 255, 0.9) 98.95%); 
+    /* background: -webkit-linear-gradient(#eee, #333); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .landing-button {
-    background: linear-gradient(91.25deg, rgba(255, 138, 0, 0.9) 12.95%, rgba(106, 35, 255, 0.9) 98.95%); 
+    /* background: linear-gradient(91.25deg, rgba(255, 138, 0, 0.9) 12.95%, rgba(106, 35, 255, 0.9) 98.95%);  */
 }
 
 .landing-button:hover {
-    background: linear-gradient(91.25deg, rgba(192, 102, 0, 0.9) 12.95%, rgba(73, 22, 184, 0.9) 98.95%); 
+    /* background: linear-gradient(91.25deg, rgba(192, 102, 0, 0.9) 12.95%, rgba(73, 22, 184, 0.9) 98.95%);  */
 }
 
 @media only screen and (max-width: 600px) {

@@ -5,7 +5,7 @@ function Home () {
 
     return (
         <section>
-            <div className="container">
+            <div className="container-sidebar">
                 <div className="landing-grid">
                     <div className="landing-content">
                         <h1 className="landing-title">Home</h1>

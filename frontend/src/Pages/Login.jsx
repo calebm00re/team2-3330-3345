@@ -40,7 +40,7 @@ function Login () {
                     </div>
                     <div className="form-field">
                         <label className="form-label" for="password">Password</label>
-                        <a class="form-field-link" href="https://google.com/" target="_blank">Forgot</a>
+                        <a class="form-field-link" href="https://google.com/">Forgot</a>
                         <input class="form-input" type="password" id="password" name="password" placeholder="···" 
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
