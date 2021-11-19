@@ -183,6 +183,36 @@ router.get("/Events", async (req, res) => {
       connection.release();
     });
   });
+
+  router.get("/ownedEvents", async (req, res) => {
+    pool.getConnection((err, connection) => {
+        if (err) {
+        console.log(connection);
+        // if there is an issue obtaining a connection, release the connection instance and log the error
+        logger.error("Problem obtaining MySQL connection", err);
+        res.status(400).send("Problem obtaining MySQL connection");
+      } else {
+        let mine = req.body['organizerID'];
+        connection.query(
+          "SELECT eventID FROM events WHERE organizerID = ?",mine,
+          (err, rows, fields) => {
+            if (err) {
+              logger.error("Error while getting events\n", err);
+              res.status(400).json({
+                data: [],
+                error: "Error obtaining values",
+              });
+            } else {
+              res.status(200).json({
+                data: rows,
+              });
+            }
+          }
+        );
+      }
+      connection.release();
+    });
+  });
   
   module.exports = router;
 
