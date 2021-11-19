@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const secret = 'dbgui3330';
 const cookieName = 'AmateurHubDt';
 const events = require('./eventRoutes');
+const user = require('./userRoutes');
 
 module.exports = function routes(app, logger) {
   // GET /
@@ -233,6 +234,6 @@ module.exports = function routes(app, logger) {
       }
     });
   });
-  app.use('/api', events);
+  app.use('/api', events, user);
 
 }
