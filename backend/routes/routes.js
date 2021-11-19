@@ -166,7 +166,7 @@ module.exports = function routes(app, logger) {
 
     // GET /api/login
   //authentification route, returns 0 if successful login, 1 if user doesn't exist, and 2 if incorrect password
-  app.get('/api/login', async (req, res) => {
+  app.post('/api/login', async (req, res) => {
     console.log(req.cookies);
 
     // obtain a connection from our pool of connections
@@ -179,6 +179,7 @@ module.exports = function routes(app, logger) {
         let userName = req.body['userName'];
         let psw = req.body['psw'];
         let sql1 = "SELECT userID FROM users WHERE userName ='" + userName + "'";
+
         connection.query(sql1, function (err, rows, fields) {
           if (err) {
             logger.error('Error while fetching values: \n', err);
@@ -187,7 +188,7 @@ module.exports = function routes(app, logger) {
               error: 'Error obtaining values'
             });
           } else {
-            console.log(rows.length);
+            console.log("rows length: " + rows.length);
             //if the user exists
             if (rows.length > 0) {
               const hash = crypto.createHmac('sha256', secret).update(psw).digest('hex');
