@@ -39,6 +39,39 @@ router.post("/createUser", async (req, res) => {
     });
   });
 
+  //get user based on userID
+  router.get("/getUser", async (req, res) => {
+    pool.getConnection((err, connection) => {
+        if (err) {
+        console.log(connection);
+        // if there is an issue obtaining a connection, release the connection instance and log the error
+        logger.error("Problem obtaining MySQL connection", err);
+        res.status(400).send("Problem obtaining MySQL connection");
+      } else {
+        let userID = req.body['userID'];
+        
+    // if there is no issue obtaining a connection, execute query
+        connection.query(
+          "SELECT * FROM users WHERE userID = ?",
+          [userID],
+          (err, rows, fields) => {
+            if (err) {
+              logger.error("Error while getting user\n", err);
+              res.status(400).json({
+                data: [],
+                error: "Error obtaining values",
+              });
+            } else {
+              res.status(200).json({
+                data: rows,
+              });
+            }
+          }
+        );
+      }
+      connection.release();
+    });
+  });
   //Delete user route using username
   router.delete("/deleteUser", async (req, res) => {
     pool.getConnection((err, connection) => {
