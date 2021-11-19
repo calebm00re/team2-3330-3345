@@ -17,6 +17,7 @@ function Login () {
         e.preventDefault();
         axios.post(`http://${url}:8000/api/login`, {userName: userName, psw: password}).then(res => {
             console.log(res);
+            console.log(userName);
             history.push('/home')
         }).catch(err => {
             console.log(err)
