@@ -6,8 +6,11 @@ import React from 'react'
 
 export const BrowseMenu = (props) =>
     <>
-        
-       
+        <div className="browse-controls">
+            {/* <input type="text">Search bar</input> */}
+            <h1>filter button</h1>
+            <h1>filter button</h1>
+        </div>
     </>
 
 class BrowsePage extends React.Component {
@@ -36,11 +39,7 @@ class BrowsePage extends React.Component {
                     }
                     {
                         !this.state.showPage && <>
-                        <div className="browse-controls">
-                            <h1>Search bar</h1>
-                            <h1>filter button</h1>
-                            <h1>filter button</h1>
-                        </div>
+                        <BrowseMenu />
                         <div className="browse-grid">
                             {
                                 [1,2,3,4,5,6,7,8].map(x => (<EventCard key={x} index={x}  onCardClick={ x => this.showSelectedPage(x) } />))
