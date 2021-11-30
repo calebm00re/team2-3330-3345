@@ -10,16 +10,16 @@ router.post("/createUser", async (req, res) => {
         logger.error("Problem obtaining MySQL connection", err);
         res.status(400).send("Problem obtaining MySQL connection");
       } else {
-        let userFirstName = req.body['userFirstName'];
-        let userLastName = req.body['userLastName'];
+        let userFirstName = req.body['firstName'];
+        let userLastName = req.body['lastName'];
         let userName = req.body['userName'];
-        let userPassword = req.body['userPassword'];
-        let userBirthday = req.body['userBirthday'];
-        let userGender = req.body['userGender'];
+        let userPassword = req.body['psw'];
+        let userBirthday = req.body['dob'];
+        // let userGender = req.body['userGender'];
     // if there is no issue obtaining a connection, execute query
         connection.query(
-          "INSERT INTO users(userFirstName, userLastName, userName, userPassword, userBirthday, userGender) VALUES(?,?,?,?,?,?)",
-          [userFirstName, userLastName, userName, userPassword, userBirthday, userGender],
+          "INSERT INTO users(firstName, lastName, userName, psw, dob) VALUES(?,?,?,?,?)",
+          [userFirstName, userLastName, userName, userPassword, userBirthday],
           (err, rows, fields) => {
             if (err) {
               logger.error("Error while posting user\n", err);

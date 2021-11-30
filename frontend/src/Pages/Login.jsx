@@ -2,35 +2,66 @@ import '../Styles/Form.css';
 import React, {useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+import {UserRepository} from '../api/userRepository'
 
 function Login () {
     //basis for login api - Work In Progress
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
+    const [errors, setErrors] = useState({});
 
     const ec2_url = ''
     const ec2 = false;
     const url = ec2 ? ec2_url : 'localhost'
 
-    const login = (e) => {
+    const userRepository = new UserRepository();
+
+    const login = async (e) => {
         e.preventDefault();
         if (userName === "" || password === "") {
             document.getElementById("form-error").style.display = "block";
             document.getElementById("form-error").innerHTML = "Incorrect username or password";
-
         } else {
-            axios.post(`http://${url}:8000/api/login`, {userName: userName, psw: password}).then(res => {
-                console.log(res);
-                console.log(userName);
-                history.push('/home')
-            }).catch(err => {
-                console.log(err)
-                document.getElementById("form-error").style.display = "block";
-            });;
+            console.log("in login")
+            e.preventDefault();
+            const res = await userRepository.login(userName, password);
+            if(!res.success) {
+                console.log("no good")
+                setErrors(res)
+                console.log(errors)
+            } else {
+                console.log("good entry")
+                history.push(`/home`)
+            }
+            // axios.post(`http://${url}:8000/api/login`, {userName: userName, psw: password}).then(res => {
+            //     console.log(res);
+            //     console.log(userName);
+            //     history.push('/home')
+            // }).catch(err => {
+            //     console.log(err)
+            //     document.getElementById("form-error").style.display = "block";
+            // });;
         }
         
     }
+
+    // const login = async (e) => {
+    //     console.log("in login")
+    //     e.preventDefault();
+    //     const res = await userRepository.login(userName, password);
+    //     if(!res.success) {
+    //         console.log("no good")
+    //         setErrors(res)
+    //         console.log(errors)
+    //     } else {
+    //         console.log("good entry")
+    //         const USER = userRepository.currentUser();
+    //         // console.log(USER.userID)
+    //         // console.log(res)
+    //         history.push(`/profile/${USER.userID}`)
+    //     }
+    // }
 
     return (
         <section>

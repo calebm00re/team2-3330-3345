@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import React from 'react';
 
 // ENTER YOUR EC2 PUBLIC IP/URL HERE
 const ec2_url = ''
@@ -13,6 +13,8 @@ export const isLogin = () => {
     return true
 }
 
+export const URL = 'http://localhost:8000';
+
 export const signup = (values) => {
     axios.get(`http://${url}:8000/createuser`, {
         firstname: values.firstName,
@@ -23,3 +25,5 @@ export const signup = (values) => {
       console.log(err)
     });
 }
+
+export const UserContext = React.createContext();

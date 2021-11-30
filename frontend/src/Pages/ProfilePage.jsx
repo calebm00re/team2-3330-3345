@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import '../Styles/Profile.css'
 import EventCard from "./EventCard";
+import { UserRepository } from "../api/userRepository";
+
+const userRepository = new UserRepository();
+const user = userRepository.currentUser();
 
 class ProfilePage extends React.Component {
     constructor (props) {
@@ -18,17 +22,6 @@ class ProfilePage extends React.Component {
         }
     }
 
-    // getProfileInfo (e) {
-    //     e.preventDefault();
-    //     axios.post(`http://${url}:8000/api/login`, {userName: userName, psw: password}).then(res => {
-    //         console.log(res);
-    //         history.push('/home')
-    //     }).catch(err => {
-    //         console.log(err)
-    //         document.getElementById("form-error").style.display = "block";
-    //     });
-    // }
-
     componentDidMount () {
     }
 
@@ -41,7 +34,6 @@ class ProfilePage extends React.Component {
         this.setState({emoji: randomEmoji});
     }
 
-
     render () {
         return (
             <section className="profile-page" onClick={ e => this.handleClick() } >
@@ -51,7 +43,7 @@ class ProfilePage extends React.Component {
                             <div className="emoji-output">
                                 { this.state.emoji ? this.state.emoji : "😶" }
                             </div>
-                            <h1 className="profile-name">First Last</h1>
+                            <h1 className="profile-name">{user.firstName} {user.lastName}</h1>
                         </div>
                         <p className="profile-bio">User Bio. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         
