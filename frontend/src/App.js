@@ -16,6 +16,8 @@ import Home from './Pages/Home';
 import OnboardingPage from './Pages/Onboarding';
 import BrowsePage from './Pages/Browse';
 import ProfilePage from './Pages/ProfileViews';
+import CreateEvent from './Pages/CreateEvent';
+import EventPage from './Pages/EventPage';
 
 // React functional component
 function App () {
@@ -122,6 +124,14 @@ function App () {
           <PrivateRoute path="/browse">
             <Sidebar />
               <BrowsePage />
+          </PrivateRoute>
+          <PrivateRoute path="/events/:eventId">
+            <Sidebar />
+              <EventPage />
+          </PrivateRoute>
+          <PrivateRoute path="/post">
+            <Sidebar />
+              <CreateEvent />
           </PrivateRoute>
         </Switch>
       </BrowserRouter>

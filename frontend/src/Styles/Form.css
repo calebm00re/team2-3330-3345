@@ -11,6 +11,11 @@
     /* box-shadow: 2px 2px 2px 1000px rgba(0, 0, 0, 0.9); */
 }
 
+.is-dark {
+    background-color: #ffffff10;
+    color: white;
+}
+
 .form-container {
     max-width: 500px;
 }
@@ -37,6 +42,10 @@
     border: none;
     padding: 1rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
 .form-input::placeholder {
