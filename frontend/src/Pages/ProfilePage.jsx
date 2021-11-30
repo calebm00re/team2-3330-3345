@@ -22,17 +22,6 @@ class ProfilePage extends React.Component {
         }
     }
 
-    // getProfileInfo (e) {
-    //     e.preventDefault();
-    //     axios.post(`http://${url}:8000/api/login`, {userName: userName, psw: password}).then(res => {
-    //         console.log(res);
-    //         history.push('/home')
-    //     }).catch(err => {
-    //         console.log(err)
-    //         document.getElementById("form-error").style.display = "block";
-    //     });
-    // }
-
     componentDidMount () {
     }
 
