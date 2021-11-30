@@ -114,27 +114,27 @@ function App () {
             <OnboardingPage />
           </Route>
           <PrivateRoute path="/home">
-            <Sidebar />
+            <Sidebar selectedTab="home" />
               <Home />
           </PrivateRoute>
           <PrivateRoute path="/profile">
-            <Sidebar />
+            <Sidebar selectedTab="profile" />
               <ProfilePage />
           </PrivateRoute>
           <PrivateRoute path="/browse">
-            <Sidebar />
+            <Sidebar selectedTab="browse" />
               <BrowsePage />
           </PrivateRoute>
           <PrivateRoute path="/events/:eventId">
-            <Sidebar />
+            <Sidebar selectedTab="browse" />
               <EventPage />
           </PrivateRoute>
           <PrivateRoute path="/edit/:eventId">
-            <Sidebar />
+            <Sidebar selectedTab="" />
               <CreateEditEvent isEditing={true} />
           </PrivateRoute>
           <PrivateRoute path="/post">
-            <Sidebar />
+            <Sidebar selectedTab="post"/>
               <CreateEditEvent isEditing={false} />
           </PrivateRoute>
         </Switch>
