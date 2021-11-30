@@ -5,25 +5,63 @@
     display: flex;
     justify-content: space-between;
     padding: 1rem;
-    position: sticky;
-    top: 1rem;
+    /* position: sticky;
+    top: 1rem; */
     background-color: #232323;
     border-radius: 0.5rem;
     margin-bottom: 2rem;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
 }
 
 .browse-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* flex-wrap: wrap; */
     grid-gap: 2rem;
 }
 
+.browse-input {
+    background-color: rgba(255, 255, 255, 0.096);
+    padding: 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    color: white;
+    border: none;
+    font:  inherit;
+    margin-right: 1rem;
+}
+
+.browse-input:focus {
+    /* border: none; */
+    outline: none;
+}
+
+@media only screen and (max-width: 1200px) {
+
+    .browse-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 2rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+
+    .browse-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 2rem;
+    }
+}
 
 .event-page {
     background-color: #232323;
     padding: 1rem 2rem 2rem 2rem;
     border-radius: 0.5rem;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    grid-gap: 4rem;
     width: auto;
 }
 
@@ -38,9 +76,27 @@
 
 .card-header-info {}
 
-.event-img {}
+.event-img {
+    width: 100%;
+}
 
-.event-title {}
+.author-wrap {
+display: flex;
+align-items: center;
+margin-top: 1rem;
+}
+
+.author-image {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    background-color: white;
+    margin-right: 0.5rem;
+}
+
+.event-title {
+    margin-top: 1rem;
+}
 
 .event-subtitle {
     color: gray;
@@ -64,4 +120,39 @@
     grid-template-columns: 1fr;
     grid-gap: 1rem;
     margin-top: 1rem;
+    grid-column: 1 / 3;
+}
+
+.back-button {
+    max-width: 4rem;
+    margin-bottom: 2rem;
+}
+
+.select-tickets {
+    grid-column: 1 / 3;
+    display: flex;
+}
+
+.btn-disabled {
+    background-color: grey !important;
+    cursor: not-allowed;
+}
+
+.no-text-wrap {
+    white-space: nowrap;
+}
+
+.text-style-muted {
+    opacity: 0.5;
+}
+
+.metrics-info {
+    background-color: rgba(255, 255, 255, 0.096);
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.metrics-heading {
+    padding-top: 1rem;
 }

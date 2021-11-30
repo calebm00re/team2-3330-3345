@@ -1,8 +1,12 @@
 import React from 'react'
-import axios from 'axios';
-const ec2_url = ''
-const ec2 = false;
-const url = ec2 ? ec2_url : 'localhost'
+// import axios from 'axios';
+// const ec2_url = ''
+// const ec2 = false;
+// const url = ec2 ? ec2_url : 'localhost'
+
+class EditProfile extends React.Component {
+
+}
 
 class ProfilePage extends React.Component {
     constructor (props) {

@@ -1,0 +1,19 @@
+
+.event-carousel {
+    display: flex;
+    overflow-x: scroll;
+    max-width: 81vw;
+}
+
+.event-carousel > * {
+    margin-right: 1rem;
+    min-width: 20rem !important;
+}
+
+.section-heading {
+    margin-bottom: 1rem;
+}
+
+.content-section {
+    margin-bottom: 4rem;
+}
