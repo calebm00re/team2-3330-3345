@@ -1,6 +1,11 @@
 import Logo from '../Assets/landing-image.svg'
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
+import { UserRepository } from '../api/userRepository';
+
+
+const userRepository = new UserRepository();
+const user = userRepository.currentUser();
 
 class EventCard extends React.Component {
     constructor (props) {
@@ -24,7 +29,7 @@ class EventCard extends React.Component {
                             <div className="emoji-output emoji-small">
                             { this.state.emoji ? this.state.emoji : "😶" }
                             </div>
-                            <span className="">Tom</span>
+                            <span className="">{user.firstName}</span>
                         </Link>
                     </div>
                     <p className="event-subtitle">A 1 line description of the event that teases what its about</p>

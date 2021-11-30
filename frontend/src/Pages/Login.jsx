@@ -34,34 +34,9 @@ function Login () {
                 console.log("good entry")
                 history.push(`/home`)
             }
-            // axios.post(`http://${url}:8000/api/login`, {userName: userName, psw: password}).then(res => {
-            //     console.log(res);
-            //     console.log(userName);
-            //     history.push('/home')
-            // }).catch(err => {
-            //     console.log(err)
-            //     document.getElementById("form-error").style.display = "block";
-            // });;
         }
         
     }
-
-    // const login = async (e) => {
-    //     console.log("in login")
-    //     e.preventDefault();
-    //     const res = await userRepository.login(userName, password);
-    //     if(!res.success) {
-    //         console.log("no good")
-    //         setErrors(res)
-    //         console.log(errors)
-    //     } else {
-    //         console.log("good entry")
-    //         const USER = userRepository.currentUser();
-    //         // console.log(USER.userID)
-    //         // console.log(res)
-    //         history.push(`/profile/${USER.userID}`)
-    //     }
-    // }
 
     return (
         <section>

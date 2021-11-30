@@ -1,6 +1,10 @@
 import Logo from '../Assets/landing-image.svg'
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
+import { UserRepository } from '../api/userRepository';
+
+const userRepository = new UserRepository();
+const user = userRepository.currentUser();
 
 function EventControlCard (props) {
     return (
@@ -198,7 +202,7 @@ export class EventPage extends React.Component {
                                             <div className="emoji-output emoji-small">
                                             { this.state.emoji ? this.state.emoji : "😶" }
                                             </div>
-                                            <span className="">Tom</span>
+                                            <span className="">{user.firstName}</span>
                                         </Link>
                                     </div>
                                     <div className="author-wrap">
