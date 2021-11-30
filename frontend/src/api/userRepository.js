@@ -64,7 +64,6 @@ export class UserRepository {
             firstName: data.firstName,
             lastName: data.lastName,
             userID: data.userID,
-            psw: password,
           })
         );
         errors.success = true;

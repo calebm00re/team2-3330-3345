@@ -17,7 +17,7 @@ function Login () {
 
     const userRepository = new UserRepository();
 
-    const login = (e) => {
+    const login = async (e) => {
         e.preventDefault();
         if (userName === "" || password === "") {
             document.getElementById("form-error").style.display = "block";
@@ -25,7 +25,7 @@ function Login () {
         } else {
             console.log("in login")
             e.preventDefault();
-            const res = userRepository.login(userName, password);
+            const res = await userRepository.login(userName, password);
             if(!res.success) {
                 console.log("no good")
                 setErrors(res)
