@@ -15,8 +15,8 @@ import SignUp from './Pages/SignUp';
 import Home from './Pages/Home';
 import OnboardingPage from './Pages/Onboarding';
 import BrowsePage from './Pages/Browse';
-import ProfilePage from './Pages/ProfileViews';
-import CreateEvent from './Pages/CreateEvent';
+import ProfilePage from './Pages/ProfilePage';
+import CreateEditEvent from './Pages/CreateEditEvent';
 import EventPage from './Pages/EventPage';
 
 // React functional component
@@ -129,9 +129,13 @@ function App () {
             <Sidebar />
               <EventPage />
           </PrivateRoute>
+          <PrivateRoute path="/edit/:eventId">
+            <Sidebar />
+              <CreateEditEvent isEditing={true} />
+          </PrivateRoute>
           <PrivateRoute path="/post">
             <Sidebar />
-              <CreateEvent />
+              <CreateEditEvent isEditing={false} />
           </PrivateRoute>
         </Switch>
       </BrowserRouter>

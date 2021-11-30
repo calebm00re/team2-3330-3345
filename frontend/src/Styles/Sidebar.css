@@ -26,3 +26,17 @@
 .pro-menu {
     height: 100%;
 }
+
+.emojiIcon {
+
+    font-size: 1.75rem !important;
+}
+.pro-icon-wrapper {
+    padding: 1rem;
+}
+
+.pro-menu-item {
+
+    font-size: 1.5rem !important;
+    margin-bottom: 0.5rem;
+}
