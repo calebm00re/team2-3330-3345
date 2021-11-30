@@ -46,7 +46,7 @@ function Home () {
                         <div className="content-section">
                             <div className="content-card">
                                 <div className="event-flex-layout">
-                                    <h1 className="">Welcome <span className="user-name">{user.userName}</span></h1>
+                                    <h1 className="">Welcome <span className="user-name">{user.firstName}</span></h1>
                                     <Clock />
                                 </div>
                                 <p>

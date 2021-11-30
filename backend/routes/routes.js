@@ -178,7 +178,7 @@ module.exports = function routes(app, logger) {
       } else {
         let userName = req.body['userName'];
         let psw = req.body['psw'];
-        let sql1 = "SELECT userID FROM users WHERE userName ='" + userName + "'";
+        let sql1 = "SELECT userID, firstName, lastName FROM users WHERE userName ='" + userName + "'";
 
         connection.query(sql1, function (err, rows, fields) {
           if (err) {
@@ -195,7 +195,7 @@ module.exports = function routes(app, logger) {
               // Do not print hashes
               // console.log(hash);
               let sql2 =
-                "SELECT userID FROM users WHERE userName ='" +
+                "SELECT userID, firstName, lastName FROM users WHERE userName ='" +
                 userName +
                 "' AND " +
                 "psw = '" +
@@ -216,6 +216,8 @@ module.exports = function routes(app, logger) {
                       ? {
                           status: 0,
                           userID: rows[0].userID,
+                          firstName: rows[0].firstName,
+                          lastName: rows[0].lastName,
                         }
                       : { status: 2 };
                   let users = {

@@ -32,7 +32,6 @@ function Login () {
                 console.log(errors)
             } else {
                 console.log("good entry")
-                const USER = userRepository.currentUser();
                 history.push(`/home`)
             }
             // axios.post(`http://${url}:8000/api/login`, {userName: userName, psw: password}).then(res => {

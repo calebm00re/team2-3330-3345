@@ -39,7 +39,7 @@ export class UserRepository {
     const errors = {};
     // const { data, status } = axios.post(URL + "/api/login", {userName: name, psw: password});
 
-    const { data, status } = await axios.post(URL + "/api/login", {userName: name, psw: password },);
+    const { data, status } = await axios.post(URL + "/api/login", {userName: name, psw: password });
 
     if (status > 204) errors.request = "Bad Request";
 
@@ -57,6 +57,9 @@ export class UserRepository {
 
       default:
         console.log("in default case")
+        console.log("data first name = " + data.firstName)
+        console.log("data first name = " + data.lastName)
+        
         sessionStorage.setItem(
           "user",
           JSON.stringify({
@@ -80,31 +83,19 @@ export class UserRepository {
    * @param {string} lastName - The last name of the user
    * @returns {Object} - The errors of the register request
    */
-  async register(
-    userName,
-    password,
-    firstName,
-    lastName,
-  ) {
+  async register(firstname, lastname, username, pass) {
     const errors = { success: false };
-
-    const { data, status } = await axios.post(URL + "/api/createUser", {
-      firstName,
-      lastName,
-      userEmail: userName,
-      userPassword: password,
-    });
-
-    if (data.status && data.status === 1) errors.email = "Email already used";
+    
+    const { status } = await axios.post(URL + "/api/createUser", {firstName: firstname, lastName: lastname, userName: username, psw: pass, dob: "none"});
 
     if (status <= 201) {
       errors.success = true;
       sessionStorage.setItem(
         "user",
         JSON.stringify({
-          username: userName,
-          userId: data.data.insertId,
-          password: password,
+          userName: username,
+          firstName: firstname,
+          lastName: lastname,
         })
       );
     }

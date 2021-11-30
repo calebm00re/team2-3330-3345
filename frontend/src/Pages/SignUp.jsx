@@ -2,6 +2,7 @@ import '../Styles/Form.css';
 import React, {useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+import {UserRepository} from '../api/userRepository'
 
 function SignUp () {
     const [userName, setUserName] = useState('');
@@ -9,12 +10,15 @@ function SignUp () {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const history = useHistory();
+    const [errors, setErrors] = useState({});
 
     const ec2_url = ''
     const ec2 = false;
     const url = ec2 ? ec2_url : 'localhost'
 
-    const register = (e) => {
+    const userRepository = new UserRepository();
+
+    const register = async (e) => {
         e.preventDefault();
 
         if (userName === "" || password === "" || firstName === "" || lastName === "") {
@@ -22,13 +26,16 @@ function SignUp () {
             document.getElementById("form-error").innerHTML = "Missing information";
             
         } else {
-            axios.post(`http://${url}:8000/api/createUser`, {userName: userName, psw: password, firstName: firstName, lastName: lastName}).then(res => {
-                console.log(res);
-                history.push('/onboarding')
-            }).catch(err => {
-                console.log(err)
-                document.getElementById("form-error").style.display = "block";
-            });;
+            console.log("in register")
+            e.preventDefault();
+            const res = await userRepository.register(firstName, lastName, userName, password);
+            if(!res.success) {
+                console.log("no good")
+                setErrors(res)
+            } else {
+                console.log("good entry")
+                history.push(`/home`)
+            }
         }
     }
         
