@@ -1,6 +1,7 @@
 import '../Styles/Home.css';
 import EventCard from './EventCard';
 import React from 'react';
+import {UserRepository} from '../api/userRepository'
 
 class Clock extends React.Component {
     constructor(props) {
@@ -35,13 +36,17 @@ class Clock extends React.Component {
 
 function Home () {
 
+  const userRepository = new UserRepository();
+
+  const user = userRepository.currentUser();
+
     return (
         <section>
             <div className="container-sidebar">
                         <div className="content-section">
                             <div className="content-card">
                                 <div className="event-flex-layout">
-                                    <h1 className="">Welcome <span className="user-name">Thomas</span></h1>
+                                    <h1 className="">Welcome <span className="user-name">user.firstName</span></h1>
                                     <Clock />
                                 </div>
                                 <p>
