@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 
-
 import Navbar from './Pages/Navbar';
 import { Sidebar } from './Pages/Sidebar';
 import Landing from './Pages/Landing.jsx';
@@ -16,6 +15,7 @@ import Home from './Pages/Home';
 import OnboardingPage from './Pages/Onboarding';
 import BrowsePage from './Pages/Browse';
 import ProfilePage from './Pages/ProfilePage';
+import ProfileEdit from './Pages/ProfileEdit';
 import CreateEditEvent from './Pages/CreateEditEvent';
 import EventPage from './Pages/EventPage';
 
@@ -110,16 +110,20 @@ function App () {
             <SignUp />
           </Route>
           <Route exact path="/onboarding">
-            <Navbar />
+            <Navbar hideButtons={true} />
             <OnboardingPage />
           </Route>
           <PrivateRoute path="/home">
             <Sidebar selectedTab="home" />
               <Home />
           </PrivateRoute>
-          <PrivateRoute path="/profile">
+          <PrivateRoute path="/profile/:userId">
             <Sidebar selectedTab="profile" />
               <ProfilePage />
+          </PrivateRoute>
+          <PrivateRoute path="/editprofile/">
+            <Sidebar selectedTab="profile" />
+              <ProfileEdit />
           </PrivateRoute>
           <PrivateRoute path="/browse">
             <Sidebar selectedTab="browse" />

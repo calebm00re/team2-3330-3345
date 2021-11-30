@@ -38,8 +38,6 @@ function Home () {
     return (
         <section>
             <div className="container-sidebar">
-                <div className="landing-grid">
-                    <div className="landing-content">
                         <div className="content-section">
                             <div className="content-card">
                                 <div className="event-flex-layout">
@@ -67,8 +65,6 @@ function Home () {
                                 }
                             </div>
                         </div>
-                    </div>
-                </div>
             </div>
         </section>
     );

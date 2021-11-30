@@ -123,7 +123,36 @@ ol, ul {
 }
 
 .content-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emoji-big {
+  font-size: 5rem;
+}
+
+.emoji-input-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.emoji-output {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  font-size: 3rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.emoji-small {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+
 }

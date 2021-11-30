@@ -16,13 +16,20 @@ function SignUp () {
 
     const register = (e) => {
         e.preventDefault();
-        axios.post(`http://${url}:8000/api/createUser`, {userName: userName, psw: password, firstName: firstName, lastName: lastName}).then(res => {
-            console.log(res);
-            history.push('/home')
-        }).catch(err => {
-            console.log(err)
+
+        if (userName === "" || password === "" || firstName === "" || lastName === "") {
             document.getElementById("form-error").style.display = "block";
-        });;
+            document.getElementById("form-error").innerHTML = "Missing information";
+            
+        } else {
+            axios.post(`http://${url}:8000/api/createUser`, {userName: userName, psw: password, firstName: firstName, lastName: lastName}).then(res => {
+                console.log(res);
+                history.push('/onboarding')
+            }).catch(err => {
+                console.log(err)
+                document.getElementById("form-error").style.display = "block";
+            });;
+        }
     }
         
   return (

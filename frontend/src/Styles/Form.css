@@ -2,10 +2,10 @@
     text-align: left;
     position: static;
     border-radius: 0.2rem;
-    color: black;
     display: grid;
     grid-gap: 1.5rem;
-    background-color: #FDFAFF;
+    background-color: #ffffff10;
+    color: white;
     padding: 2rem;
     min-width: 20rem;
     /* box-shadow: 2px 2px 2px 1000px rgba(0, 0, 0, 0.9); */
@@ -17,7 +17,7 @@
 }
 
 .form-container {
-    max-width: 500px;
+    max-width: 40rem
 }
 
 .form-header {
@@ -42,6 +42,9 @@
     border: none;
     padding: 1rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    font-size: 1.1rem;
+    background-color: #ffffff10;
+    color: white;
 }
 
 ::-webkit-calendar-picker-indicator {
@@ -50,6 +53,7 @@
 
 .form-input::placeholder {
    color: grey;
+    font-size: 1.1rem;
 }
 
 .form-button {
@@ -72,11 +76,12 @@
 }
 
 .form-field-link {
+    display: none;
     text-decoration: none;
     position: absolute;
     right: 0;
     top: 0;
-    color: #6200c4;
+    color: rgb(255, 255, 0);
 }
 
 
@@ -107,8 +112,8 @@
 
 #form-error {
     display: none;
-    background-color: rgb(255, 204, 195);
-    color: red;
+    background-color: rgba(255, 195, 195, 0.15);
+    color: rgb(255, 73, 73);
     padding: 1rem;
     text-align: center;
   }

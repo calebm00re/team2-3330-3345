@@ -15,14 +15,21 @@ function Login () {
 
     const login = (e) => {
         e.preventDefault();
-        axios.post(`http://${url}:8000/api/login`, {userName: userName, psw: password}).then(res => {
-            console.log(res);
-            console.log(userName);
-            history.push('/home')
-        }).catch(err => {
-            console.log(err)
+        if (userName === "" || password === "") {
             document.getElementById("form-error").style.display = "block";
-        });;
+            document.getElementById("form-error").innerHTML = "Incorrect username or password";
+
+        } else {
+            axios.post(`http://${url}:8000/api/login`, {userName: userName, psw: password}).then(res => {
+                console.log(res);
+                console.log(userName);
+                history.push('/home')
+            }).catch(err => {
+                console.log(err)
+                document.getElementById("form-error").style.display = "block";
+            });;
+        }
+        
     }
 
     return (

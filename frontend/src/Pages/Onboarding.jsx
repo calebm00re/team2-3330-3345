@@ -1,69 +1,74 @@
-// from https://github.com/srdjan/react-multistep
 
-import Multistep from 'react-multistep';
 
 import '../Styles/Form.css'
 import '../Styles/Onboarding.css'
+import { useState, useEffect } from 'react'
 
-const stepOne = <div className="form multistep-form">
-                     <div className="form-header">
-                        <h2>Account setup</h2>
-                    </div>
-                    <div className="form-field">
-                        <label className="form-label" for="username">Username</label>
-                        <input class="form-input" type="text" id="username" name="username" placeholder="jappleseed@yahoo.com" />
-                    </div>
-                    <div className="form-field">
-                        <label className="form-label" for="username">Username</label>
-                        <input class="form-input" type="text" id="username" name="username" placeholder="jappleseed@yahoo.com" />
-                    </div>
-                    <div className="form-field">
-                        <label className="form-label" for="username">Username</label>
-                        <input class="form-input" type="text" id="username" name="username" placeholder="jappleseed@yahoo.com" />
-                    </div>
-                </div>
-            
-            
-const stepTwo = <div className="form multistep-form">
-                    <div className="form-header">
-                        <h2>Fill profile</h2>
-                    </div>
-                </div>
+function OnboardingPage (props) {
+    const [ emoji, setEmoji ] = useState('')
 
-const stepThree = <div className="form multistep-form">
-                    <div className="form-header">
-                        <h2>Choose preferences</h2>
-                    </div>
-                </div>
-                
-const stepFour = <div className="form multistep-form">
-                    <div className="form-header">
-                    <h2>Review profile</h2>
-                </div>
-                    <div className="content-center">
-                        <a href="./home" className="form-button multistep-form-finish">Start exploring</a> 
-                    </div>
-                </div>
+    function setRandomEmoji () {
+        let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","👺","🤡","⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏","🎱","🪀","🏓"]
+        let randomEmoji = emojies[Math.floor(Math.random()*emojies.length)];
+        setEmoji(randomEmoji);
+    }
 
-const steps = [
-    {name: 'StepOne', component: stepOne},
-    {name: 'StepTwo', component: stepTwo},
-    {name: 'StepThree', component: stepThree},
-    {name: 'StepFour', component: stepFour}
-];
+    useEffect(() => {
+        setRandomEmoji();
 
-const OnboardingPage = () => {
+
+    }, [])
+
     return(
         <>
-            {/* <NavBar isLoggedIn={true} /> */}
+            <section className="">
+                <div className="container container-small">
 
-            <section className="onboarding-section">
-                <div className="container">
-
-                    {/* <Form> */}
-                    <Multistep showNavigation={true} steps={steps}/>
-                    
-                    {/* </Form> */}
+                    <form name="loginForm" className="form is-dark">
+                        <div>
+                            <h1 className="mb-2">Welcome <span className="user-name">Thomas</span></h1>
+                            <p className="text-style-muted">Fill out your profile so people can know who you are!</p>
+                        </div>
+                        <p className="form-label">Profile Icon</p>
+                        <div className="emoji-input-wrap">
+                            <div className="emoji-output">
+                                { emoji }
+                            </div>
+                            <div className="button button-secondary emoji-button" onClick={() => setRandomEmoji()}>
+                                Generate random
+                            </div>
+                        </div>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="bio">Bio</label>
+                            <textarea className="form-input is-dark" id="bio" name="bio" placeholder="I am a college student that likes to hangout and meet new people." 
+                                // value={this.state.eventName}
+                                // onChange={(e) => this.setState({eventName: e.target.value})}
+                            />
+                        </div>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="gender">Gender</label>
+                            <select className="form-input is-dark" id="gender" name="gender">
+                                <option value="">Select one</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Female">Other</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                            </select>
+                        </div>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="birthdate">Birthday</label>
+                            {/* <div className="emojiOutput">
+                                <p className="emoji-big">{text}</p>
+                            </div> */}
+                            
+                            <input className="form-input is-dark" type="date" id="birthdate" name="birthdate"
+                                // value={this.state.eventName}
+                                // onChange={(e) => this.setState({eventName: e.target.value})}
+                            />
+                        </div>
+                        <div id="form-error">Invalid info</div>
+                        <button type="submit" className="form-button button-large" value="Submit">Jump into the app!</button>
+                    </form>
                 </div>
             </section>
         </>
