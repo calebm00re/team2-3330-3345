@@ -1,0 +1,15 @@
+
+.profile-icon-name {
+    display: flex;
+    align-items: center;
+}
+
+.profile-name {
+    font-size: 2rem;
+
+}
+
+.profile-bio {
+    font-size: 1.5rem;
+    font-weight: normal;
+}

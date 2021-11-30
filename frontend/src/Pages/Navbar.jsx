@@ -1,7 +1,7 @@
 import '../Styles/Navbar.css'
 import logo from '../Assets/Logo.png'
 
-function Navbar () {
+function Navbar (props) {
 
     return (
         <section className="nav" id="nav">
@@ -9,14 +9,21 @@ function Navbar () {
                 <a id="logo" className="logo-button" href="/">
                     <img className="logo" src={logo} alt="logo"></img>
                 </a>
-                <div className="nav-menu">
-                    <a id="login-btn" className="button button-secondary" href="/login">
-                        Login
-                    </a>
-                    <a id="signup-btn" className="button" href="/signup">
-                        Sign Up
-                    </a>
-                </div>
+
+                {
+                    !props.hideButtons ?
+                    <div className="nav-menu">
+                        <a id="login-btn" className="button button-secondary" href="/login">
+                            Login
+                        </a>
+                        <a id="signup-btn" className="button" href="/signup">
+                            Sign Up
+                        </a>
+                    </div>
+                    :
+                    <></>
+                }
+                
             </div>
         </section>
     );

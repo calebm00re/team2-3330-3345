@@ -75,7 +75,35 @@ function EventTickets () {
     )
 }
 
-function EventReviews () {
+
+function ReviewForm () {
+    const [reviewBody, setReviewBody] = useState([]);
+    const [reviewRating, setReviewRating] = useState([]);
+
+    const handleSubmit = () => {
+    }
+
+    return (
+        <>
+            <div className="review-card">
+                <form name="review-form" className="review-form">
+                    <input className="form-input" placeholder="Had a good time? Leave a review" />
+
+                    <select className="form-input" >
+                        <option valaue="5">⭐⭐⭐⭐⭐</option>
+                        <option valaue="4">⭐⭐⭐⭐</option>
+                        <option valaue="3">⭐⭐⭐</option>
+                        <option valaue="2">⭐⭐</option>
+                        <option valaue="1">⭐</option>
+                    </select>
+                    <button className="button">Submit Review</button>
+                </form>
+            </div>
+        </>
+    )
+}
+
+function EventReviews (props) {
     const [reviews, setReviews] = useState([]);
 
     const getReviews = () => {
@@ -86,13 +114,15 @@ function EventReviews () {
         <div className="event-page reviews-list">
             <h2>Reviews</h2>
             {
-                [1,2,3,4,5].map((x, i) => <>
+                [1,2].map((x, i) => <>
                      <div className="review-card">
                         <div className="review-header">
-                            <div className="author-wrap">
-                                <div className="author-image"></div>
-                                Posted by Tom
-                            </div>
+                            <Link className="author-wrap" to="/profile/1">
+                                <div className="emoji-output emoji-small">
+                                { props.emoji ? props.emoji : "😶" }
+                                </div>
+                                <span className="">Tom</span>
+                            </Link>
                             <p>Posted 11/2/3 3:02pm</p>
                         </div>
                         <div className="rating">
@@ -106,6 +136,7 @@ function EventReviews () {
                     </div>
                 </>)
             }
+            <ReviewForm />
            
             
         </div>
@@ -163,19 +194,21 @@ export class EventPage extends React.Component {
                                             <div className="">5/2/2022</div>
                                             <div className="">San Ramone</div>
                                         </div>
+                                        <Link className="author-wrap" to="/profile/1">
+                                            <div className="emoji-output emoji-small">
+                                            { this.state.emoji ? this.state.emoji : "😶" }
+                                            </div>
+                                            <span className="">Tom</span>
+                                        </Link>
                                     </div>
                                     <div className="author-wrap">
                                         {
-                                            !this.props.ownerView ?
+                                            this.props.ownerView ?
                                             <>
                                                 <EventControlCard eventId={this.state.eventId} />
                                             </>
                                             :
                                             <>
-                                                <div className="author-wrap">
-                                                    <div className="author-image"></div>
-                                                    Posted by Tom
-                                                </div>
                                             </>
                                         }
                                     </div>

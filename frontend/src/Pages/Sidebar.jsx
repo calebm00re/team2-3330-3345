@@ -51,7 +51,7 @@ export const Sidebar = (props) =>
             </SubMenu> */}
             <MenuItem icon={<EmojiIcon emoji="🤸"/>}>
                 Profile
-                <Link to="/profile" />
+                <Link to="/profile/1" />
                 {
                     props.selectedTab === 'profile' ?
                     <div className="sidebar-selectedtab-indicator"></div>

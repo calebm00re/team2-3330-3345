@@ -20,10 +20,12 @@ class EventCard extends React.Component {
                     }
                     <div className="event-flex-layout">
                         <h2 className="event-title">Event {this.props.index}</h2>
-                        <div className="author-wrap">
-                            <div className="author-image text-style-muted"></div>
-                            Posted by <span className="author-name">Tom</span>
-                        </div>
+                        <Link className="author-wrap" to="/profile/1">
+                            <div className="emoji-output emoji-small">
+                            { this.state.emoji ? this.state.emoji : "😶" }
+                            </div>
+                            <span className="">Tom</span>
+                        </Link>
                     </div>
                     <p className="event-subtitle">A 1 line description of the event that teases what its about</p>
                 </div>
@@ -43,7 +45,7 @@ class EventCard extends React.Component {
                 }
                 
                 <div className="card-buttons">
-                    <Link to={"events/" + this.props.index} className="button">Details</Link>
+                    <Link to={"/events/" + this.props.index} className="button">Details</Link>
                 </div>
             </article>
         )
