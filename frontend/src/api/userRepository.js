@@ -1,4 +1,5 @@
 import axios from "axios";
+import {URL} from '../utils/utils'
 
 export class UserRepository {
   /**
@@ -32,34 +33,38 @@ export class UserRepository {
    * @param {string} password - The password to sign in with
    * @returns {Object} - the errors of the login request
    */
+
+
   async login(name, password) {
     const errors = {};
-    const { data, status } = await axios.get(URL + "/api/login", {
-      params: { userEmail: name, userPassword: password },
-    });
+    // const { data, status } = axios.post(URL + "/api/login", {userName: name, psw: password});
+
+    const { data, status } = await axios.post(URL + "/api/login", {userName: name, psw: password },);
 
     if (status > 204) errors.request = "Bad Request";
 
     switch (data.status) {
       case 1:
-        errors.email = "There is no user with this email";
+        errors.userName = "There is no user with this email";
         errors.success = false;
+        console.log("case 1: " + errors.userName)
         break;
       case 2:
-        errors.password = "Incorrect password";
+        errors.psw = "Incorrect password";
         errors.success = false;
+        console.log("case 2: " + errors.password)
         break;
 
       default:
+        console.log("in default case")
         sessionStorage.setItem(
           "user",
           JSON.stringify({
-            username: name,
-            role: data.jobTitle ?? null,
-            userId: data.userId,
-            officeId: data.officeId ?? null,
-            password: password,
-            status: data.status ?? 0,
+            userName: name,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            userID: data.userID,
+            psw: password,
           })
         );
         errors.success = true;
@@ -108,22 +113,39 @@ export class UserRepository {
     return errors;
   }
 
-//   /**
-//    * Get information about a user
-//    * @param {number} id - The id of the user to get
-//    * @returns {[Object, Object]} - Data, error tuple
-//    */
-//   async getUserById(id) {
-//     const errors = { success: false };
-//     const { data, status } = await axios.get(URL + "/api/user", {
-//       params: { userId: id },
-//     });
+  /**
+   * Get information about a user
+   * @param {number} id - The id of the user to get
+   * @returns {[Object, Object]} - Data, error tuple
+   */
+  async getUserById(id) {
+    console.log(id)
+    const errors = { success: false };
+    const { data, status } = await axios.get(URL + "/api/getUser", {params: { userID: id }});
 
-//     if (status >= 201) errors.request = "Bad Request";
-//     else errors.success = true;
+    if (status >= 201) errors.request = "Bad Request";
+    else errors.success = true;
 
-//     return [data, errors];
-//   }
+    return [data, errors];
+  }
+
+    /**
+   * Get information about a user
+   * @param {number} username - The id of the user to get
+   * @returns {[Object, Object]} - Data, error tuple
+   */
+     async getUserIDByName(username) {
+      const errors = { success: false };
+      const { data, status } = await axios.get(URL + "/api/getUser", {
+        params: { userName: username },
+      });
+  
+      if (status >= 201) errors.request = "Bad Request";
+      else errors.success = true;
+  
+      return [data, errors];
+    }
+  
 
 //   /**
 //    * Get an array of all users
