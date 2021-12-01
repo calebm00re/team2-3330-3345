@@ -40,7 +40,7 @@ router.post("/createUser", async (req, res) => {
   });
 
   //get user based on userID
-  router.get("/getUser", async (req, res) => {
+  router.post("/getUser", async (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) {
         console.log(connection);
@@ -72,6 +72,7 @@ router.post("/createUser", async (req, res) => {
       connection.release();
     });
   });
+
   //Delete user route using username
   router.delete("/deleteUser", async (req, res) => {
     pool.getConnection((err, connection) => {
@@ -114,23 +115,22 @@ router.post("/createUser", async (req, res) => {
         logger.error("Problem obtaining MySQL connection", err);
         res.status(400).send("Problem obtaining MySQL connection");
       } else {
-        let userFirstNameOld = req.body['userFirstNameOld'];
-        let userLastNameOld = req.body['userLastNameOld'];
-        let userNameOld = req.body['userNameOld'];
-        let userPasswordOld = req.body['userPasswordOld'];
-        let userBirthdayOld = req.body['userBirthdayOld'];
-        let userGenderOld = req.body['userGenderOld'];
-        let userFirstNameNew = req.body['userFirstNameNew'];
-        let userLastNameNew = req.body['userLastNameNew'];
-        let userNameNew = req.body['userNameNew'];
-        let userPasswordNew = req.body['userPasswordNew'];
-        let userBirthdayNew = req.body['userBirthdayNew'];
-        let userGenderNew = req.body['userGenderNew'];
+        // let userFirstNameOld = req.body['userFirstNameOld'];
+        // let userLastNameOld = req.body['userLastNameOld'];
+        // let userNameOld = req.body['userNameOld'];
+        // let userPasswordOld = req.body['userPasswordOld'];
+        // let userBirthdayOld = req.body['userBirthdayOld'];
+        // let userGenderOld = req.body['userGenderOld'];
+        let userID = req.body['userID'];
+        let userFirstNameNew = req.body['firstName'];
+        let userLastNameNew = req.body['lastName'];
+        let userBirthdayNew = req.body['dob'];
+        let userBioNew = req.body['bio'];
         
     // if there is no issue obtaining a connection, execute query
         connection.query(
-          "UPDATE users SET userFirstName = ?,userLastName = ?,userName = ?,userPassword = ?,userBirthday = ?,userGender = ? WHERE userFirstName = ? && userLastName = ? && userName = ? && userPassword = ? && userBirthday = ? && userGender = ?",
-          [userFirstNameNew,userLastNameNew,userNameNew,userPasswordNew,userBirthdayNew,userGenderNew, userFirstNameOld,userLastNameOld,userNameOld,userPasswordOld,userBirthdayOld,userGenderOld],
+          "UPDATE users SET firstName = ?, lastName = ?, dob = ?, bio = ? WHERE userID = ?",
+          [userFirstNameNew,userLastNameNew,userBirthdayNew,userBioNew, userID],
           (err, rows, fields) => {
             if (err) {
               logger.error("Error while editing user\n", err);
