@@ -32,7 +32,8 @@ class CreateEditEvent extends React.Component {
         // put request to edit event details
     }
 
-    createEvent = () => {
+    createEvent = (e) => {
+        e.preventDefault();
         console.log("createEvent WAS CALLED LETS GOOO");
         axios.post(`${URL}/api/createEvent`, {organizerID: 20, eventName: this.state.eventName, eventDescription: this.state.eventDescription,
             eventDate: this.state.eventDate, numTickets: this.state.numTickets, eventLocation: this.state.eventLocation, eventCategories: this.state.eventCategories}).then(res => {
@@ -55,7 +56,7 @@ class CreateEditEvent extends React.Component {
                             :
                             <></>
                         }
-                        <form name="loginForm" onSubmit={this.props.isEditing ? this.editEvent : this.createEvent} className="form is-dark">
+                        <form name="loginForm" onSubmit={this.createEvent} className="form is-dark">
                             <div className="form-header"><h2>{this.props.isEditing ? "Edit event details" : "Post an event"}</h2></div>
                             <div className="form-field">
                                 <label className="form-label" for="name">Name of event</label>

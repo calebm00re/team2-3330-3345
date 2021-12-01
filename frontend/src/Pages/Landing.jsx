@@ -2,7 +2,7 @@ import '../Styles/Landing.css';
 import LandingImage from '../Assets/landing-image.svg'
 import Typing from 'react-typing-animation';
 import EventCard from './EventCard';
-import EventReviews from './EventReviews';
+// import EventReviews from './EventReviews';
 import AppScreenshot from '../Assets/app-preview.png';
 
 function Landing () {
@@ -50,7 +50,7 @@ function Landing () {
                     </div>
                     <div className="landing-visual">
                         <div className="event-carousel">
-                            <EventReviews />
+                            {/* <EventReviews /> */}
                         </div>
                     </div>
                 </div>

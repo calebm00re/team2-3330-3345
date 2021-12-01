@@ -115,12 +115,6 @@ router.post("/createUser", async (req, res) => {
         logger.error("Problem obtaining MySQL connection", err);
         res.status(400).send("Problem obtaining MySQL connection");
       } else {
-        // let userFirstNameOld = req.body['userFirstNameOld'];
-        // let userLastNameOld = req.body['userLastNameOld'];
-        // let userNameOld = req.body['userNameOld'];
-        // let userPasswordOld = req.body['userPasswordOld'];
-        // let userBirthdayOld = req.body['userBirthdayOld'];
-        // let userGenderOld = req.body['userGenderOld'];
         let userID = req.body['userID'];
         let userFirstNameNew = req.body['firstName'];
         let userLastNameNew = req.body['lastName'];
