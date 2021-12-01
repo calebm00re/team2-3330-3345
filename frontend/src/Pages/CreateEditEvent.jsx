@@ -1,8 +1,11 @@
 import '../Styles/Form.css';
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { URL } from '../utils/utils';
+import { URL, UserContext } from '../utils/utils';
+import { UserRepository } from '../api/userRepository';
 
+const userRepository = new UserRepository();
+const user = userRepository.currentUser();
 class CreateEditEvent extends React.Component {
 
     state = {
@@ -36,10 +39,10 @@ class CreateEditEvent extends React.Component {
         e.preventDefault();
         console.log("createEvent WAS CALLED LETS GOOO");
         axios.post(`${URL}/api/createEvent`, {organizerID: 20, eventName: this.state.eventName, eventDescription: this.state.eventDescription,
-            eventDate: this.state.eventDate, numTickets: this.state.numTickets, eventLocation: this.state.eventLocation, eventCategories: this.state.eventCategories}).then(res => {
+            eventDate: this.state.eventDate, numTickets: this.state.numTickets, eventLocation: this.state.eventLocation, eventCategories: this.state.eventCategories, organizerID: user.userID}).then(res => {
             const d = res.data.data;
             console.log(d);
-            window.location.href = "/profile/1";
+            window.location.href = "/events/" + user.userID;
         }).catch(err => {
             console.log(err)
         });

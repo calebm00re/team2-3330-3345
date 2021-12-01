@@ -38,7 +38,7 @@ class EventCard extends React.Component {
             <article className="event-card">
                 <div className="card-header-info">
                     {
-                        !this.props.isTicket ?
+                        false ?
                         <img src={Logo} loading="lazy" width="30%" alt="Logo" className="event-img" />
                         :
                         <></>
@@ -60,8 +60,8 @@ class EventCard extends React.Component {
                         <div className="card-tags">
                             { this.props.event.eventGenre ? <div className="">{this.props.event.eventGenre}</div> : <></>}
                             { this.props.event.eventLocation ? <div className="">{this.props.event.eventLocation}</div> : <></>}
-                            { this.props.event.eventDate ? <div className="">{this.props.event.eventDate}</div> : <></>}
-                            { this.props.event.eventTime ? <div className="">{this.props.event.eventTime}</div> : <></>}
+                            {/* { this.props.event.eventDate ? <div className="">{this.props.event.eventDate}</div> : <></>} */}
+                            {/* { this.props.event.eventTime ? <div className="">{this.props.event.eventTime}</div> : <></>} */}
                         </div>
                     </>
                     :

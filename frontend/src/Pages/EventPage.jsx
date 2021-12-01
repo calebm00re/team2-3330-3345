@@ -194,18 +194,18 @@ export class EventPage extends React.Component {
                     <div className="container-sidebar">
                         <a href="/browse" className="button button-secondary back-button">← Back</a>
                         <article className="event-page">
-                            <img src={Logo} loading="lazy" width="30%" alt="Logo" className="event-img" />
+                            {/* <img src={Logo} loading="lazy" width="30%" alt="Logo" className="event-img" /> */}
                     
                             <div className="card-header-info">
-                                <div className="event-flex-layout">
+                                <div className="event-page-layout">
                                     <div>
                                         <h2 className="event-title">{this.state.event.eventName}</h2>
                                         <p className="event-subtitle">{this.state.event.eventDescription}</p>
                                         <div className="card-tags">
                                             { this.state.event.eventGenre ? <div className="">{this.state.event.eventGenre}</div> : <></>}
                                             { this.state.event.eventLocation ? <div className="">{this.state.event.eventLocation}</div> : <></>}
-                                            { this.state.event.eventDate ? <div className="">{this.state.event.eventDate}</div> : <></>}
-                                            { this.state.event.eventTime ? <div className="">{this.state.event.eventTime}</div> : <></>}
+                                            {/* { this.state.event.eventDate ? <div className="">{this.state.event.eventDate}</div> : <></>}
+                                            { this.state.event.eventTime ? <div className="">{this.state.event.eventTime}</div> : <></>} */}
                                         </div>
                                         <Link className="author-wrap" to="/profile/1">
                                             <div className="emoji-output emoji-small">
@@ -214,9 +214,9 @@ export class EventPage extends React.Component {
                                             <span className="">{this.state.organizerName}</span>
                                         </Link>
                                     </div>
-                                    <div className="author-wrap">
+                                    <div className="">
                                         {
-                                            this.props.ownerView ?
+                                            this.state.event.organizerID == user.userID ?
                                             <>
                                                 <EventControlCard eventId={this.state.eventId} />
                                             </>
