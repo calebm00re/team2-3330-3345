@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db");
+const secret = 'dbgui3330';
+const crypto = require('crypto');
 
 router.post("/createUser", async (req, res) => {
     pool.getConnection((err, connection) => {
@@ -15,11 +17,11 @@ router.post("/createUser", async (req, res) => {
         let userName = req.body['userName'];
         let userPassword = req.body['psw'];
         let userBirthday = req.body['dob'];
-        // let userGender = req.body['userGender'];
-    // if there is no issue obtaining a connection, execute query
+        const hash = crypto.createHmac('sha256', secret).update(userPassword).digest('hex');
+        // if there is no issue obtaining a connection, execute query
         connection.query(
           "INSERT INTO users(firstName, lastName, userName, psw, dob) VALUES(?,?,?,?,?)",
-          [userFirstName, userLastName, userName, userPassword, userBirthday],
+          [userFirstName, userLastName, userName, hash, userBirthday],
           (err, rows, fields) => {
             if (err) {
               logger.error("Error while posting user\n", err);
