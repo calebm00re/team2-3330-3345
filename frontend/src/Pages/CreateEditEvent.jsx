@@ -38,7 +38,7 @@ class CreateEditEvent extends React.Component {
     createEvent = (e) => {
         e.preventDefault();
         console.log("createEvent WAS CALLED LETS GOOO");
-        axios.post(`${URL}/api/createEvent`, {organizerID: 20, eventName: this.state.eventName, eventDescription: this.state.eventDescription,
+        axios.post(`${URL}/api/createEvent`, {organizerID: user.userID, eventName: this.state.eventName, eventDescription: this.state.eventDescription,
             eventDate: this.state.eventDate, numTickets: this.state.numTickets, eventLocation: this.state.eventLocation, eventCategories: this.state.eventCategories, organizerID: user.userID}).then(res => {
             const d = res.data.data;
             console.log(d);
