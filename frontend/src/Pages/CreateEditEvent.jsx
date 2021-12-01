@@ -1,6 +1,7 @@
-
-import '../Styles/Form.css'
-import React, { useState, useEffect } from 'react'
+import '../Styles/Form.css';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import { URL } from '../utils/utils';
 
 class CreateEditEvent extends React.Component {
 
@@ -8,7 +9,7 @@ class CreateEditEvent extends React.Component {
         eventName: '',
         eventDescription: '',
         eventDate: '',
-        eventNumTickets: '',
+        numTickets: '',
         eventLocation: '',
         eventCategories: ''
     }
@@ -32,7 +33,15 @@ class CreateEditEvent extends React.Component {
     }
 
     createEvent = () => {
-        // post request to create new event
+        console.log("createEvent WAS CALLED LETS GOOO");
+        axios.post(`${URL}/api/createEvent`, {organizerID: 20, eventName: this.state.eventName, eventDescription: this.state.eventDescription,
+            eventDate: this.state.eventDate, numTickets: this.state.numTickets, eventLocation: this.state.eventLocation, eventCategories: this.state.eventCategories}).then(res => {
+            const d = res.data.data;
+            console.log(d);
+            window.location.href = "/profile/1";
+        }).catch(err => {
+            console.log(err)
+        });
     }
 
     render () {
@@ -72,8 +81,8 @@ class CreateEditEvent extends React.Component {
                             <div className="form-field">
                                 <label className="form-label" for="numTickets">Number of Tickets</label>
                                 <input class="form-input is-dark" type="number" id="numTickets" name="numTickets" placeholder="50"
-                                    value={this.state.eventNumTickets}
-                                    onChange={(e) => this.setState({eventNumTickets: e.target.value})}
+                                    value={this.state.numTickets}
+                                    onChange={(e) => this.setState({numTickets: e.target.value})}
                                 />
                             </div>
                             <div className="form-field">

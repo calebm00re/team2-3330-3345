@@ -16,11 +16,12 @@ router.post("/createEvent", async (req, res) => {
         let eventGenre = req.body['eventGenre'];
         let eventDescription = req.body['eventDescription'];
         let eventDate = req.body['eventDate'];
-        let eventTime = req.body['eventTime'];
+        let numtix = req.body['numTickets'];
+        let organizerID = req.body['organizerID'];
     // if there is no issue obtaining a connection, execute query
         connection.query(
-          "INSERT INTO events(eventName, eventLocation, eventGenre, eventDescription, eventDate, eventTime) VALUES(?,?,?,?,?,?)",
-          [eventName, eventLocation, eventGenre, eventDescription, eventDate, eventTime],
+          "INSERT INTO events(eventName, eventLocation, eventGenre, eventDescription, eventDate, numTickets, organizerID) VALUES(?,?,?,?,?,?,?)",
+          [eventName, eventLocation, eventGenre, eventDescription, eventDate, numtix, organizerID],
           (err, rows, fields) => {
             if (err) {
               logger.error("Error while posting event\n", err);
