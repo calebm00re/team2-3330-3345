@@ -42,7 +42,7 @@ router.post("/createEvent", async (req, res) => {
   });
 
 //Get list of events route
-router.get("/Events", async (req, res) => {
+router.post("/Events", async (req, res) => {
   pool.getConnection((err, connection) => {
       if (err) {
       console.log(connection);
@@ -73,8 +73,8 @@ router.get("/Events", async (req, res) => {
 });
 
 
-  //Get specific event route
-  router.get("/Event", async (req, res) => {
+  //Get specific event route based on event ID
+  router.post("/Event", async (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) {
         console.log(connection);
@@ -82,11 +82,11 @@ router.get("/Events", async (req, res) => {
         logger.error("Problem obtaining MySQL connection", err);
         res.status(400).send("Problem obtaining MySQL connection");
       } else {
-        let eventName = req.body['eventName'];
+        let eventName = req.body['eventID'];
         
     // if there is no issue obtaining a connection, execute query
         connection.query(
-          "SELECT * FROM events WHERE eventName = ?",
+          "SELECT * FROM events WHERE eventID = ?",
           [eventName],
           (err, rows, fields) => {
             if (err) {
@@ -185,7 +185,7 @@ router.get("/Events", async (req, res) => {
     });
   });
 
-  router.get("/ownedEvents", async (req, res) => {
+  router.post("/ownedEvents", async (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) {
         console.log(connection);

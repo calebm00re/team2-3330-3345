@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
-router.get("/ticketsEvents", async (req, res) => {
+router.post("/ticketsEvents", async (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) {
         console.log(connection);
@@ -12,7 +12,7 @@ router.get("/ticketsEvents", async (req, res) => {
       } else {
         let mine = req.body['userFK'];
         connection.query(
-          "SELECT eventFK FROM events WHERE userFK = ?",mine,
+          "SELECT eventFK FROM tickets WHERE userFK = ?",mine,
           (err, rows, fields) => {
             if (err) {
               logger.error("Error while getting events\n", err);
@@ -32,7 +32,7 @@ router.get("/ticketsEvents", async (req, res) => {
     });
   });
 
-  router.get("/ticketsUsers", async (req, res) => {
+  router.post("/ticketsUsers", async (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) {
         console.log(connection);
@@ -40,9 +40,9 @@ router.get("/ticketsEvents", async (req, res) => {
         logger.error("Problem obtaining MySQL connection", err);
         res.status(400).send("Problem obtaining MySQL connection");
       } else {
-        let eventid = req.body['eventFK'];
+        let eventFK = req.body['eventFK'];
         connection.query(
-          "SELECT userFK FROM events WHERE eventFK = ?",eventid,
+          "SELECT userFK FROM tickets WHERE eventFK = ?",eventFK,
           (err, rows, fields) => {
             if (err) {
               logger.error("Error while getting events\n", err);
@@ -126,3 +126,5 @@ router.get("/ticketsEvents", async (req, res) => {
       connection.release();
     });
   });
+
+  module.exports = router;
