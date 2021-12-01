@@ -2,6 +2,8 @@ import Logo from '../Assets/landing-image.svg'
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
 import { UserRepository } from '../api/userRepository';
+import axios from 'axios';
+import { URL } from '../utils/utils';
 
 const userRepository = new UserRepository();
 const user = userRepository.currentUser();
@@ -119,7 +121,7 @@ function EventReviews (props) {
             <h2>Reviews</h2>
             {
                 [1,2].map((x, i) => <>
-                     <div className="review-card">
+                     <div className="review-card" key={x}>
                         <div className="review-header">
                             <Link className="author-wrap" to="/profile/1">
                                 <div className="emoji-output emoji-small">
@@ -150,31 +152,39 @@ function EventReviews (props) {
 
 export class EventPage extends React.Component {
     state = {
-        eventId: ''
+        event: {},
+        organizerName: ''
     };
 
-    componentDidMount () {
+    loadEventDetails () {
         const pathname = window.location.pathname;
         const eventId = pathname.substring(8);
-        console.log(eventId)
-        this.setState({eventId});
-        // this.loadEventDetails();
+
+        axios.post(`${URL}/api/Event/`, {eventID: eventId}).then(res => {
+            this.setState({event: res.data.data[0]})
+            this.getProfileInfo();
+        }).catch(err => {
+            console.log(err)
+        });
+        
+        //get event by eventID
+
     }
 
-    loadEventDetails () {
-        // console.log(eventId);
-        
-        let id = this.props.match.params.eventId;
-        console.log(id)
-        // if (id) {
-        //     this.productsRepository.getProduct(id)
-        //         .then(product =>
-        //             this.setState({product})
-        //         );
-        // }
-        // assign ticket to user
-        // make it unavailable to other users
+    getProfileInfo = () => {
+        axios.post(`${URL}/api/getUser`, {userID: this.state.event.organizerID}).then(res => {
+            const d = res.data.data[0];
+            let fullName = d.firstName + ' ' + d.lastName;
+            this.setState({organizerName: fullName})
+            
+        }).catch(err => {
+            console.log(err)
+        });
+    }
 
+
+    componentDidMount () {
+        this.loadEventDetails();
     }
 
     render () {
@@ -189,20 +199,19 @@ export class EventPage extends React.Component {
                             <div className="card-header-info">
                                 <div className="event-flex-layout">
                                     <div>
-                                        <h2 className="event-title">Event {this.state.eventId}</h2>
-                                        <p className="event-subtitle">A 1 line description of the event that teases what its about</p>
+                                        <h2 className="event-title">{this.state.event.eventName}</h2>
+                                        <p className="event-subtitle">{this.state.event.eventDescription}</p>
                                         <div className="card-tags">
-                                            <div className="">Music</div>
-                                            <div className="">Min 1 year</div>
-                                            <div className="">$55257.1</div>
-                                            <div className="">5/2/2022</div>
-                                            <div className="">San Ramone</div>
+                                            { this.state.event.eventGenre ? <div className="">{this.state.event.eventGenre}</div> : <></>}
+                                            { this.state.event.eventLocation ? <div className="">{this.state.event.eventLocation}</div> : <></>}
+                                            { this.state.event.eventDate ? <div className="">{this.state.event.eventDate}</div> : <></>}
+                                            { this.state.event.eventTime ? <div className="">{this.state.event.eventTime}</div> : <></>}
                                         </div>
                                         <Link className="author-wrap" to="/profile/1">
                                             <div className="emoji-output emoji-small">
                                             { this.state.emoji ? this.state.emoji : "😶" }
                                             </div>
-                                            <span className="">{user.firstName}</span>
+                                            <span className="">{this.state.organizerName}</span>
                                         </Link>
                                     </div>
                                     <div className="author-wrap">
