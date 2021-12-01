@@ -5,38 +5,49 @@ import EventCard from './EventCard'
 import EventPage from './EventPage';
 import React from 'react'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { URL } from '../utils/utils';
 
 class BrowsePage extends React.Component {
 
     constructor (props) {
         super(props);
         this.state = {
-            events: [1,2,3,4,5,6,7,8],
+            events: {},
             searchTerm: ''
         }
     }
 
     getEvents () {
-        // get all events and store array of events in this.state.events
+        axios.post(`${URL}/api/Events/`, {}).then(res => {
+            this.setState({events: res.data.data})
+            console.log(this.state.events)
+        }).catch(err => {
+            console.log(err)
+        });
 
-        // axios.get(`http://${url}:8000/events/`, {param: param}).then(res => {
-        //     console.log(res);
-        // }).catch(err => {
-        //     console.log(err)
-        // });;
     }
-    getEventsFiltered () {
+
+    filterEvents () {
         // once we have events, we can make the search more sophisticated
-        let events = this.state.events;
-        if (this.state.searchTerm !== "") {
-            events = events.filter(i => ((i + '') === this.state.searchTerm))
-        }
-        return events
+        // let events = this.state.events;
+        // events = Object.values(events).filter(i => ((i + '') === this.state.searchTerm))
+        
+        // this.setState({events})
     }
 
     handleSearch (searchTerm) {
-        console.log(searchTerm)
         this.setState({searchTerm})
+
+        if (searchTerm !== "") {
+            console.log(searchTerm)
+            this.filterEvents();
+        }
+    }
+
+    componentDidMount () {
+        this.getEvents();
+        this.filterEvents();
     }
 
     render () {
@@ -59,8 +70,8 @@ class BrowsePage extends React.Component {
                         </div>
                         <div className="browse-grid">
                             {
-                                this.getEventsFiltered().map(x => (
-                                    <EventCard key={x} index={x} />
+                                Object.keys(this.state.events).map((x, i) => (
+                                    <EventCard key={x} index={i} event={this.state.events[i]}/>
                                 ))
                             }
                         </div>

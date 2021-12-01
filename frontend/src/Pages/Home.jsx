@@ -1,7 +1,9 @@
 import '../Styles/Home.css';
 import EventCard from './EventCard';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {UserRepository} from '../api/userRepository'
+import axios from 'axios';
+import { URL } from '../utils/utils';
 
 class Clock extends React.Component {
     constructor(props) {
@@ -39,7 +41,30 @@ function Home () {
   const userRepository = new UserRepository();
 
   const user = userRepository.currentUser();
-  console.log(user)
+
+  const [events, setEvents] = useState({});
+
+  const getMyTickets = () => {
+    // axios.post(`${URL}/api/Tickets/`, {}).then(res => {
+    //     setEvents(res.data.data)
+    // }).catch(err => {
+    //     console.log(err)
+    // });
+}
+
+
+  const getMyEvents = () => {
+      axios.post(`${URL}/api/Events/`, {}).then(res => {
+          setEvents(res.data.data)
+      }).catch(err => {
+          console.log(err)
+      });
+  }
+
+  useEffect(() => {
+    getMyEvents();
+  }, [])
+
     return (
         <section>
             <div className="container-sidebar">
@@ -58,7 +83,7 @@ function Home () {
                             <h2 className="section-heading">Events you have tickets to</h2>
                             <div className="event-carousel">
                                 {
-                                    [1,2,3,4,5,6,7,9,10].map((x, i) => <EventCard key={x} index={x} isTicket={true} /> )
+                                    Object.keys(events).map((x, i) => <EventCard key={x} index={x} isTicket={true} event={events[i]} /> )
                                 }
                             </div>
                         </div>
@@ -66,7 +91,7 @@ function Home () {
                             <h2 className="section-heading">Events you posted</h2>
                             <div className="event-carousel">
                                 {
-                                    [1,2,3,4,5,6,7,9,10].map((x, i) => <EventCard key={x} index={x} isTicket={false} /> )
+                                    Object.keys(events).map((x, i) => <EventCard key={x} index={x} isTicket={false} event={events[i]} /> )
                                 }
                             </div>
                         </div>
