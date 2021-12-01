@@ -35,7 +35,6 @@ function Login () {
                 history.push(`/home`)
             }
         }
-        
     }
 
     return (

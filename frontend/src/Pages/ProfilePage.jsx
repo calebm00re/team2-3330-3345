@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import '../Styles/Profile.css'
 import EventCard from "./EventCard";
 import { UserRepository } from "../api/userRepository";
+import axios from "axios";
+import { URL } from "../utils/utils";
 
 const userRepository = new UserRepository();
 const user = userRepository.currentUser();
@@ -13,6 +15,7 @@ class ProfilePage extends React.Component {
         this.state = {
             isEditing: true,
             emoji: '',
+            bio: '',
             first: '',
             last: '',
             username: '',
@@ -22,12 +25,28 @@ class ProfilePage extends React.Component {
         }
     }
 
+    getProfileInfo = () => {
+        axios.post(`${URL}/api/getUser`, {userID: user.userID}).then(res => {
+            const d = res.data.data;
+            this.setState({bio: d[0].bio})
+            this.setState({first: d[0].firstName})
+            this.setState({last: d[0].lastName})
+            this.setState({dob: d[0].dob})
+            this.setState({bio: d[0].bio})
+            
+        }).catch(err => {
+            console.log(err)
+        });
+    }
+
     componentDidMount () {
+        this.getProfileInfo();
     }
 
     handleClick () {
         // this.props.onCardClick(this.props.index)
     }
+
     setRandomEmoji () {
         let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","👺","🤡","⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏","🎱","🪀","🏓"]
         let randomEmoji = emojies[Math.floor(Math.random()*emojies.length)];
@@ -43,9 +62,9 @@ class ProfilePage extends React.Component {
                             <div className="emoji-output">
                                 { this.state.emoji ? this.state.emoji : "😶" }
                             </div>
-                            <h1 className="profile-name">{user.firstName} {user.lastName}</h1>
+                            <h1 className="profile-name">{this.state.first} {this.state.last}</h1>
                         </div>
-                        <p className="profile-bio">User Bio. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p className="profile-bio">{this.state.bio} </p>
                         
                         <div className="content-section">
                             <h2 className="section-heading">Events User has posted</h2>

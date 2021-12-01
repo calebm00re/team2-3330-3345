@@ -111,7 +111,7 @@ export class UserRepository {
   async getUserById(id) {
     console.log(id)
     const errors = { success: false };
-    const { data, status } = await axios.get(URL + "/api/getUser", {params: { userID: id }});
+    const { data, status } = await axios.get(URL + "/api/getUser", {userID: id });
 
     if (status >= 201) errors.request = "Bad Request";
     else errors.success = true;

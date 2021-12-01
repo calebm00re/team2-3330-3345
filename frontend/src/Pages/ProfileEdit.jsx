@@ -1,9 +1,13 @@
 import React from 'react'
-// import axios from 'axios';
-// const ec2_url = ''
-// const ec2 = false;
-// const url = ec2 ? ec2_url : 'localhost'
+import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { URL } from '../utils/utils';
+import { UserRepository } from "../api/userRepository";
+// import { useHistory } from 'react-router-dom';
+
+// history = useHistory();
+const userRepository = new UserRepository();
+const user = userRepository.currentUser();
 
 class ProfileEdit extends React.Component {
     constructor (props) {
@@ -13,25 +17,38 @@ class ProfileEdit extends React.Component {
             emoji: '',
             first: '',
             last: '',
-            username: '',
-            password: '',
             dob: '',
-            userId: '',
+            bio: '',
         }
     }
 
-    // getProfileInfo (e) {
-    //     e.preventDefault();
-    //     axios.post(`http://${url}:8000/api/login`, {userName: userName, psw: password}).then(res => {
-    //         console.log(res);
-    //         history.push('/home')
-    //     }).catch(err => {
-    //         console.log(err)
-    //         document.getElementById("form-error").style.display = "block";
-    //     });
-    // }
+    getProfileInfo = () => {
+        axios.post(`${URL}/api/getUser`, {userID: user.userID}).then(res => {
+            const d = res.data.data;
+            this.setState({bio: d[0].bio})
+            this.setState({first: d[0].firstName})
+            this.setState({last: d[0].lastName})
+            this.setState({dob: d[0].dob})
+            this.setState({bio: d[0].bio})
+            console.log(d);
+        }).catch(err => {
+            console.log(err)
+        });
+    }
+
+    updateProfile = (e) => {
+        e.preventDefault();
+        axios.put(`${URL}/api/editUser`, {userID: user.userID, firstName: this.state.first, lastName: this.state.last, dob: this.state.dob, bio: this.state.bio}).then(res => {
+            const d = res.data.data;
+            console.log(d);
+            window.location.href = "/profile/1";
+        }).catch(err => {
+            console.log(err)
+        });
+    }
 
     componentDidMount () {
+        this.getProfileInfo();
     }
 
     handleClick () {
@@ -66,48 +83,37 @@ class ProfileEdit extends React.Component {
                             <div className="form-field">
                                 <label className="form-label" for="firstName">First name</label>
                                 <input class="form-input" type="text" id="firstName" name="firstName" placeholder="Johnny" 
-                                        // value ={firstName}
-                                        // onChange={(e) => setFirstName(e.target.value)}
+                                    value ={ this.state.first }
+                                    onChange={(e) => this.setState({ first: e.target.value })}
                                 />
                             </div>
                             <div className="form-field">
                                 <label className="form-label" for="lastName">Last name</label>
                                 <input class="form-input" type="text" id="lastName" name="lastName" placeholder="Appleseed" 
-                                        // value={lastName}
-                                        // onChange={(e) => setLastName(e.target.value)}
+                                    value ={ this.state.last }
+                                    onChange={(e) => this.setState({ last: e.target.value })}
                                 />
                             </div>
                         </div>
                         <div className="form-field">
                             <label className="form-label" htmlFor="bio">Bio</label>
                             <textarea className="form-input is-dark" id="bio" name="bio" placeholder="I am a college student that likes to hangout and meet new people." 
-                                // value={this.state.eventName}
-                                // onChange={(e) => this.setState({eventName: e.target.value})}
+                                value ={ this.state.bio }
+                                onChange={(e) => this.setState({ bio: e.target.value })}
                             />
                         </div>
                         <div className="form-field">
-                            <label className="form-label" htmlFor="gender">Gender</label>
-                            <select className="form-input is-dark" id="gender" name="gender">
-                                <option value="">Select one</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Female">Other</option>
-                                <option value="Prefer not to say">Prefer not to say</option>
-                            </select>
-                        </div>
-                        <div className="form-field">
-                            <label className="form-label" htmlFor="birthdate">Birthday</label>
-                            {/* <div className="emojiOutput">
-                                <p className="emoji-big">{text}</p>
-                            </div> */}
+                            <label className="form-label" htmlFor="birthdate">
+                                Birthday
+                            </label>
                             
                             <input className="form-input is-dark" type="date" id="birthdate" name="birthdate"
-                                // value={this.state.eventName}
-                                // onChange={(e) => this.setState({eventName: e.target.value})}
+                                value ={ this.state.dob }
+                                onChange={(e) => this.setState({ dob: e.target.value })}
                             />
                         </div>
                         <div id="form-error">Invalid info</div>
-                        <Link to="/profile" type="submit" className="form-button" value="Submit">Save changes</Link>
+                        <Link to="/profile/1" className="form-button" value="Submit" onClick={e => this.updateProfile(e)}>Save changes</Link>
                     </form>
                 </div>
             </section>
