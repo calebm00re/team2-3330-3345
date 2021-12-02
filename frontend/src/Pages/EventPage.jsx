@@ -12,7 +12,7 @@ let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","�
 function EventControlCard (props) {
     return (
         <>
-            <div className="metrics-info">
+            {/* <div className="metrics-info">
                 <p className="metrics-visibility-label">🔒 Only visible by you</p>
                 <h2>5/20 tickets claimed</h2>
                 <p className="text-style-muted">Attendees:</p>
@@ -27,7 +27,7 @@ function EventControlCard (props) {
                     }
                 </div>
                 <Link to={"../edit/" + props.eventId} className={"button button-secondary no-text-wrap"} >Edit Event</Link>
-            </div>
+            </div> */}
             
         </>
     )
@@ -64,15 +64,15 @@ function EventTickets () {
                 <>
                     <h2 className="">Claim a ticket to reserve your spot</h2>
                     <div className="select-tickets">
-                        <select className="browse-input" onChange={ e => handleTicketSelection(e.target.value)}>
+                        {/* <select className="browse-input" onChange={ e => handleTicketSelection(e.target.value)}>
                             <option value="">Select a ticket</option>
                             {
                                 [1,2,3].map((x,i) => 
                                     <option value={x} key={i}>Ticket {x}</option>
                                 )
                             }
-                        </select>
-                        <button className={ticketSelected ? "button no-text-wrap" : "button no-text-wrap btn-disabled"} onClick={e => claimTicket(ticket)}>Claim Ticket</button>
+                        </select> */}
+                        <button className={"button no-text-wrap"} onClick={e => claimTicket(ticket)}>Claim Ticket</button>
                     </div>
                 </>
             }
