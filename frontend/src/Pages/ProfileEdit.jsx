@@ -8,7 +8,7 @@ import { UserRepository } from "../api/userRepository";
 // history = useHistory();
 const userRepository = new UserRepository();
 const user = userRepository.currentUser();
-
+const profileUser = "/profile/" + user.userID
 class ProfileEdit extends React.Component {
     constructor (props) {
         super(props);
@@ -41,7 +41,7 @@ class ProfileEdit extends React.Component {
         axios.put(`${URL}/api/editUser`, {userID: user.userID, firstName: this.state.first, lastName: this.state.last, dob: this.state.dob, bio: this.state.bio}).then(res => {
             const d = res.data.data;
             console.log(d);
-            window.location.href = "/profile/1";
+            window.location.href = profileUser;
         }).catch(err => {
             console.log(err)
         });
@@ -113,7 +113,7 @@ class ProfileEdit extends React.Component {
                             />
                         </div>
                         <div id="form-error">Invalid info</div>
-                        <Link to="/profile/1" className="form-button" value="Submit" onClick={e => this.updateProfile(e)}>Save changes</Link>
+                        <Link to={profileUser} className="form-button" value="Submit" onClick={e => this.updateProfile(e)}>Save changes</Link>
                     </form>
                 </div>
             </section>
