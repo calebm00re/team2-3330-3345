@@ -34,8 +34,6 @@ function Landing () {
                 <div className="landing-grid">
                     <div className="landing-visual">
                         <div className="event-carousel">
-                            <EventCard />
-                            <EventCard />
                         </div>
                     </div>
                     <div className="landing-content">
