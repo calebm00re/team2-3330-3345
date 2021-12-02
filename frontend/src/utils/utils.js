@@ -4,7 +4,8 @@ import React from 'react';
 // ENTER YOUR EC2 PUBLIC IP/URL HERE
 const ec2_url = 'http://3.143.233.193:8000'
 // CHANGE THIS TO TRUE IF HOSTING ON EC2, MAKE SURE TO ADD IP/URL ABOVE
-const ec2 = true;
+const ec2 = false;
+
 // USE localhost OR ec2_url ACCORDING TO ENVIRONMENT
 export const URL = ec2 ? ec2_url : 'http://localhost:8000'
 // export const URL = "http://3.143.233.193:8000";

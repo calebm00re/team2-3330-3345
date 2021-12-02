@@ -68,12 +68,9 @@ function Home () {
 
 
   const getMyTickets = () => {
-    axios.post(`${URL}/api/ticketsEvents/`, {userFK: user.userID}).then(res => {
-      console.log(res.data)
-      // let tickets = res.data.data;
-      // for (var key in eventIDs) {
-      //   getEvent(key, eventIDs)
-      // }
+    axios.post(`${URL}/api/tickedEvents/`, {organizerID: user.userID}).then(res => {
+      console.log(res.data.data)
+      setTickets(res.data.data)
     }).catch(err => {
         console.log(err)
     }).finally(() => {

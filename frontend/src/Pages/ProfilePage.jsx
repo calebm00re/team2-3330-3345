@@ -83,7 +83,7 @@ class ProfilePage extends React.Component {
                         </div>
                         <p className="profile-bio">{this.state.bio} </p>
                         
-                        <div className="content-section">
+                        <div className="content-section mt-4">
                             <h2 className="section-heading">Events User has posted:</h2>
                             {<div className="browse-grid">
                             {
