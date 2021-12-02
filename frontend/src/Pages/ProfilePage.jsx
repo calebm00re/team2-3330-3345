@@ -6,8 +6,9 @@ import { UserRepository } from "../api/userRepository";
 import axios from "axios";
 import { URL } from "../utils/utils";
 
+
 const userRepository = new UserRepository();
-const user = userRepository.currentUser();
+var user;
 
 class ProfilePage extends React.Component {
     constructor (props) {
@@ -22,17 +23,21 @@ class ProfilePage extends React.Component {
             password: '',
             dob: '',
             userId: 0,
+            User: null
         }
     }
 
     getProfileInfo = () => {
-        const pathname = window.location.pathname;
-        const userIdString = pathname.substring(9);
-        const userId = userIdString.match(/(\d+)/)[0];
-        this.setState({userId});
+        // const pathname = window.location.pathname;
+        // const userIdString = pathname.substring(9);
+        // const userId = userIdString.match(/(\d+)/)[0];
+        // this.setState({userId});
 
-        axios.post(`${URL}/api/getUser`, {userID: userId}).then(res => {
+        user = userRepository.currentUser();
+        console.log(user.userID)
+        axios.post(`${URL}/api/getUser`, {userID: user.userID}).then(res => {
             const d = res.data.data;
+            this.setState({userId: d[0].userID})
             this.setState({bio: d[0].bio})
             this.setState({first: d[0].firstName})
             this.setState({last: d[0].lastName})
@@ -44,7 +49,7 @@ class ProfilePage extends React.Component {
         });
     }
 
-    componentDidMount () {
+    componentDidMount () {        
         this.getProfileInfo();
     }
 
@@ -79,12 +84,13 @@ class ProfilePage extends React.Component {
                                 }
                             </div> */}
                         </div>
+                            <Link to="/editprofile" className="button top-right-button button-large">Edit Profile</Link>
                         {
-                            this.state.userId == user.userID ?
-                                <Link to="/editprofile" className="button top-right-button button-large">Edit Profile</Link>
-                            :
-                            <>
-                            </>
+                            // this.state.userId == user.userID ?
+                                
+                            // :
+                            // <>
+                            // </>
                         }
                     </div>
                 </div>
