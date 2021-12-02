@@ -8,8 +8,7 @@ import { URL } from "../utils/utils";
 
 
 const userRepository = new UserRepository();
-var user;
-
+const user = userRepository.currentUser();
 class ProfilePage extends React.Component {
     constructor (props) {
         super(props);
@@ -33,7 +32,7 @@ class ProfilePage extends React.Component {
         // const userId = userIdString.match(/(\d+)/)[0];
         // this.setState({userId});
 
-        user = userRepository.currentUser();
+        
         console.log(user.userID)
         axios.post(`${URL}/api/getUser`, {userID: user.userID}).then(res => {
             const d = res.data.data;
@@ -50,6 +49,7 @@ class ProfilePage extends React.Component {
     }
 
     componentDidMount () {        
+        this.setRandomEmoji();
         this.getProfileInfo();
     }
 
@@ -59,7 +59,7 @@ class ProfilePage extends React.Component {
 
     setRandomEmoji () {
         let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","👺","🤡","⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏","🎱","🪀","🏓"]
-        let randomEmoji = emojies[Math.floor(Math.random()*emojies.length)];
+        let randomEmoji = emojies[user.userID % 23];
         this.setState({emoji: randomEmoji});
     }
 

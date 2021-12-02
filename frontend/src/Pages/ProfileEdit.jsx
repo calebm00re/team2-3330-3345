@@ -48,6 +48,7 @@ class ProfileEdit extends React.Component {
     }
 
     componentDidMount () {
+        this.setRandomEmoji();
         this.getProfileInfo();
     }
 
@@ -57,7 +58,7 @@ class ProfileEdit extends React.Component {
 
     setRandomEmoji () {
         let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","👺","🤡","⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏","🎱","🪀","🏓"]
-        let randomEmoji = emojies[Math.floor(Math.random()*emojies.length)];
+        let randomEmoji = emojies[user.userID % 23];
         this.setState({emoji: randomEmoji});
     }
 
@@ -75,9 +76,9 @@ class ProfileEdit extends React.Component {
                             <div className="emoji-output">
                                 { this.state.emoji }
                             </div>
-                            <div className="button button-secondary emoji-button" onClick={() => this.setRandomEmoji()}>
+                            {/* <div className="button button-secondary emoji-button" onClick={() => this.setRandomEmoji()}>
                                 Generate random
-                            </div>
+                            </div> */}
                         </div>
                         <div className="double-form-field-wrap">
                             <div className="form-field">
