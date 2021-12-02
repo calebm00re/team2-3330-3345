@@ -29,7 +29,8 @@ function Login () {
             if(!res.success) {
                 console.log("no good")
                 setErrors(res)
-                console.log(errors)
+                document.getElementById("form-error").style.display = "block";
+                document.getElementById("form-error").innerHTML = "Invalid login credentials";
             } else {
                 console.log("good entry")
                 history.push(`/home`)

@@ -194,7 +194,7 @@ export class EventPage extends React.Component {
             <>
                 <section className="browse">
                     <div className="container-sidebar">
-                        <a href="/browse" className="button button-secondary back-button">← Back</a>
+                        <a href="/browse" className="button button-secondary back-button">← Browse</a>
                         <article className="event-page">
                             {/* <img src={Logo} loading="lazy" width="30%" alt="Logo" className="event-img" /> */}
                     
