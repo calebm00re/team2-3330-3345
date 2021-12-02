@@ -52,10 +52,37 @@ function Home () {
     // });
 }
 
+  const getEvent = (eventID) => {
+
+    
+  }
+  //get event by eventID
+
+  const loadAllEvents = (eventIDs) => {
+
+    var eventsTemp = {}
+    for (var key in eventIDs) {
+      let eventID = eventIDs[key].eventID
+
+      var event = {};
+      axios.post(`${URL}/api/Event/`, {eventID: eventID}).then(res => {
+          console.log(res.data.data[0]);
+          event = res.data.data[0]
+      }).catch(err => {
+          console.log(err)
+      });
+
+      console.log(event)
+    }
+    console.log(eventsTemp)
+    // setEvents(eventsTemp)
+  }
 
   const getMyEvents = () => {
-      axios.post(`${URL}/api/Events/`, {}).then(res => {
-          setEvents(res.data.data)
+      axios.post(`${URL}/api/ownedEvents/`, {organizerID: user.userID}).then(res => {
+        // console.log(res.data.data)
+        let eventIDs = res.data.data;
+        loadAllEvents(eventIDs)
       }).catch(err => {
           console.log(err)
       });
@@ -91,7 +118,7 @@ function Home () {
                             <h2 className="section-heading">Events you posted</h2>
                             <div className="event-carousel">
                                 {
-                                    Object.keys(events).map((x, i) => <EventCard key={x} index={x} isTicket={false} event={events[i]} /> )
+                                    Object.keys(events).map((x, i) => <EventCard key={x} index={x} isTicket={false} event={events[x]} /> )
                                 }
                             </div>
                         </div>

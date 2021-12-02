@@ -185,6 +185,7 @@ export class EventPage extends React.Component {
 
     componentDidMount () {
         this.loadEventDetails();
+        console.log(this.state.event.organizerID, user.userID)
     }
 
     render () {
@@ -207,7 +208,7 @@ export class EventPage extends React.Component {
                                             {/* { this.state.event.eventDate ? <div className="">{this.state.event.eventDate}</div> : <></>}
                                             { this.state.event.eventTime ? <div className="">{this.state.event.eventTime}</div> : <></>} */}
                                         </div>
-                                        <Link className="author-wrap" to="/profile/1">
+                                        <Link className="author-wrap" to={"/profile/" + this.state.event.organizerID}>
                                             <div className="emoji-output emoji-small">
                                             { this.state.emoji ? this.state.emoji : "😶" }
                                             </div>
@@ -218,7 +219,7 @@ export class EventPage extends React.Component {
                                         {
                                             this.state.event.organizerID == user.userID ?
                                             <>
-                                                <EventControlCard eventId={this.state.eventId} />
+                                                <EventControlCard eventId={this.state.event.eventID} />
                                             </>
                                             :
                                             <>

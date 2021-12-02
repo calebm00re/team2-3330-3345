@@ -41,6 +41,16 @@ class ProfileEdit extends React.Component {
         axios.put(`${URL}/api/editUser`, {userID: user.userID, firstName: this.state.first, lastName: this.state.last, dob: this.state.dob, bio: this.state.bio}).then(res => {
             const d = res.data.data;
             console.log(d);
+            sessionStorage.setItem(
+                "user",
+                JSON.stringify({
+                  userName: this.state.userName,
+                  firstName: this.state.first,
+                  lastName: this.state.last,
+                  userID: user.userID,
+                })
+              );
+
             window.location.href = profileUser;
         }).catch(err => {
             console.log(err)

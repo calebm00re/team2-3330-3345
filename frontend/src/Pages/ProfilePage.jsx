@@ -27,14 +27,13 @@ class ProfilePage extends React.Component {
     }
 
     getProfileInfo = () => {
-        // const pathname = window.location.pathname;
-        // const userIdString = pathname.substring(9);
-        // const userId = userIdString.match(/(\d+)/)[0];
-        // this.setState({userId});
+        const pathname = window.location.pathname;
+        const userIdString = pathname.substring(9);
+        const userId = userIdString.match(/(\d+)/)[0];
 
         
         console.log(user.userID)
-        axios.post(`${URL}/api/getUser`, {userID: user.userID}).then(res => {
+        axios.post(`${URL}/api/getUser`, {userID: userId}).then(res => {
             const d = res.data.data;
             this.setState({userId: d[0].userID})
             this.setState({bio: d[0].bio})
@@ -75,23 +74,7 @@ class ProfilePage extends React.Component {
                             <h1 className="profile-name">{this.state.first} {this.state.last}</h1>
                         </div>
                         <p className="profile-bio">{this.state.bio} </p>
-                        
-                        <div className="content-section">
-                            <h2 className="section-heading">Events User has posted</h2>
-                            {/* <div className="browse-grid">
-                                {
-                                    [1,2,3,4].map((x, i) => <EventCard key={x} index={x} isTicket={false} /> )
-                                }
-                            </div> */}
-                        </div>
                             <Link to="/editprofile" className="button top-right-button button-large">Edit Profile</Link>
-                        {
-                            // this.state.userId == user.userID ?
-                                
-                            // :
-                            // <>
-                            // </>
-                        }
                     </div>
                 </div>
             </section>
