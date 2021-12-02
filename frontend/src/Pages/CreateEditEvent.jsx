@@ -6,7 +6,9 @@ import { UserRepository } from '../api/userRepository';
 
 const userRepository = new UserRepository();
 const user = userRepository.currentUser();
+const profileUser = "/profile/" + user.userID;
 class CreateEditEvent extends React.Component {
+    
 
     state = {
         eventName: '',
@@ -42,7 +44,7 @@ class CreateEditEvent extends React.Component {
             eventDate: this.state.eventDate, numTickets: this.state.numTickets, eventLocation: this.state.eventLocation, eventCategories: this.state.eventCategories, organizerID: user.userID}).then(res => {
             const d = res.data.data;
             console.log(d);
-            window.location.href = "/events/" + user.userID;
+            window.location.href = profileUser;
         }).catch(err => {
             console.log(err)
         });
@@ -55,7 +57,7 @@ class CreateEditEvent extends React.Component {
                     <div className="container-sidebar">
                         {
                             this.props.isEditing ?
-                            <a href={"/events/" + 1} className="button button-secondary back-button">← Back</a>
+                            <a href={profileUser} className="button button-secondary back-button">← Back</a>
                             :
                             <></>
                         }
