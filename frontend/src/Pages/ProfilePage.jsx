@@ -27,7 +27,6 @@ class ProfilePage extends React.Component {
     }
 
     getProfileInfo = () => {
-
         user = userRepository.currentUser();
         console.log(user.userID)
         axios.post(`${URL}/api/getUser`, {userID: user.userID}).then(res => {
