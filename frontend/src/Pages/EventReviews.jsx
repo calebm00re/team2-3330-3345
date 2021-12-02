@@ -31,6 +31,7 @@ function ReviewForm () {
 
 function EventReviews (props) {
     const [reviews, setReviews] = useState([]);
+    let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","👺","🤡","⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏","🎱","🪀","🏓"];
 
     const getReviews = () => {
     }
@@ -45,7 +46,7 @@ function EventReviews (props) {
                         <div className="review-header">
                             <Link className="author-wrap" to="/profile/1">
                                 <div className="emoji-output emoji-small">
-                                { props.emoji ? props.emoji : "😶" }
+                                { emojies[Math.floor(Math.random()*emojies.length)] }
                                 </div>
                                 <span className="">Tom</span>
                             </Link>

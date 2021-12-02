@@ -7,8 +7,9 @@ import { UserRepository } from "../api/userRepository";
 
 // history = useHistory();
 const userRepository = new UserRepository();
-const user = userRepository.currentUser();
-const profileUser = "/profile/" + user.userID
+// const user = userRepository.currentUser();
+var user;
+var profileUser; 
 class ProfileEdit extends React.Component {
     constructor (props) {
         super(props);
@@ -23,6 +24,8 @@ class ProfileEdit extends React.Component {
     }
 
     getProfileInfo = () => {
+        user = userRepository.currentUser();
+        profileUser = "/profile/" + user.userID
         axios.post(`${URL}/api/getUser`, {userID: user.userID}).then(res => {
             const d = res.data.data;
             this.setState({bio: d[0].bio})
@@ -58,8 +61,8 @@ class ProfileEdit extends React.Component {
     }
 
     componentDidMount () {
-        this.setRandomEmoji();
         this.getProfileInfo();
+        this.setRandomEmoji();
     }
 
     handleClick () {
