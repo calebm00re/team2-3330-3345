@@ -70,7 +70,7 @@ function EventTickets () {
                 </>
                 :
                 <>
-                    <h2 className="">Claim a ticket to reserve your spot</h2>
+                    <p className="">Claim a ticket to reserve your spot</p>
                     <div className="select-tickets">
                         {/* <select className="browse-input" onChange={ e => handleTicketSelection(e.target.value)}>
                             <option value="">Select a ticket</option>
@@ -251,7 +251,6 @@ export class EventPage extends React.Component {
                             </div>
                             <EventTickets />
                         </article>
-                        <EventReviews />
                     </div>
                 </section>
             </>

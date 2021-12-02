@@ -101,7 +101,7 @@ function Home () {
       } else {
         console.log("taking too long to load info")
       }
-  }, 500);
+  }, 1000);
   }, [])
 
     return (
