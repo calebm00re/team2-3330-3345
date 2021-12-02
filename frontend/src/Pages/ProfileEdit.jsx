@@ -48,8 +48,9 @@ class ProfileEdit extends React.Component {
     }
 
     componentDidMount () {
-        this.setRandomEmoji();
         this.getProfileInfo();
+        this.setRandomEmoji();
+
     }
 
     handleClick () {

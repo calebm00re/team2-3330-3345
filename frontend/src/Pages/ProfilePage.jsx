@@ -8,7 +8,7 @@ import { URL } from "../utils/utils";
 
 
 const userRepository = new UserRepository();
-const user = userRepository.currentUser();
+var user;
 class ProfilePage extends React.Component {
     constructor (props) {
         super(props);
@@ -27,12 +27,8 @@ class ProfilePage extends React.Component {
     }
 
     getProfileInfo = () => {
-        // const pathname = window.location.pathname;
-        // const userIdString = pathname.substring(9);
-        // const userId = userIdString.match(/(\d+)/)[0];
-        // this.setState({userId});
 
-        
+        user = userRepository.currentUser();
         console.log(user.userID)
         axios.post(`${URL}/api/getUser`, {userID: user.userID}).then(res => {
             const d = res.data.data;
@@ -48,9 +44,9 @@ class ProfilePage extends React.Component {
         });
     }
 
-    componentDidMount () {        
+    componentDidMount () { 
+        this.getProfileInfo();       
         this.setRandomEmoji();
-        this.getProfileInfo();
     }
 
     handleClick () {
