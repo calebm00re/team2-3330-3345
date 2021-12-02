@@ -86,7 +86,7 @@ export class UserRepository {
   async register(firstname, lastname, username, pass) {
     const errors = { success: false };
     
-    const { data, status } = await axios.post(URL + "/api/createUser", {firstName: firstname, lastName: lastname, userName: username, psw: pass, dob: "none"});
+    const { data, status } = await axios.post(URL + "/api/createUser", {firstName: firstname, lastName: lastname, userName: username, psw: pass, dob: "none", bio: "This is the start of something new."});
 
     if (status <= 201) {
       errors.success = true;
