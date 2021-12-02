@@ -7,7 +7,7 @@ import { URL } from '../utils/utils';
 
 const userRepository = new UserRepository();
 const user = userRepository.currentUser();
-
+let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","👺","🤡","⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏","🎱","🪀","🏓"];
 class EventCard extends React.Component {
     constructor (props) {
         super(props);
@@ -47,7 +47,7 @@ class EventCard extends React.Component {
                         <h2 className="event-title">{this.props.event.eventName ? this.props.event.eventName : "Event name"}</h2>
                         <Link className="author-wrap" to={"/profile/" + this.props.event.organizerID}>
                             <div className="emoji-output emoji-small">
-                            { this.state.emoji ? this.state.emoji : "😶" }
+                            { emojies[Math.floor(Math.random()*emojies.length)] }
                             </div>
                             <span className="">{this.state.organizerName}</span>
                         </Link>
