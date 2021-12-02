@@ -112,6 +112,7 @@ function ReviewForm () {
 
 function EventReviews (props) {
     const [reviews, setReviews] = useState([]);
+    const [emoji, setEmoji] = useState([]);
 
     const getReviews = () => {
     }
@@ -128,7 +129,7 @@ function EventReviews (props) {
                                 <div className="emoji-output emoji-small">
                                 { emojies[Math.floor(Math.random()*emojies.length)] }
                                 </div>
-                                <span className="">Tom</span>
+                                <span className="">Anonymous</span>
                             </Link>
                             <p>Posted 11/2/3 3:02pm</p>
                         </div>
@@ -154,8 +155,16 @@ function EventReviews (props) {
 export class EventPage extends React.Component {
     state = {
         event: {},
-        organizerName: ''
+        organizerName: '',
+        emoji: '',
     };
+
+    setRandomEmoji () {
+        console.log("in emoji func")
+        let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","👺","🤡","⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏","🎱","🪀","🏓"]
+        let randomEmoji = emojies[this.state.event.organizerID % 23];
+        this.setState({emoji: randomEmoji});
+    }
 
     loadEventDetails () {
         const pathname = window.location.pathname;
@@ -163,6 +172,7 @@ export class EventPage extends React.Component {
 
         axios.post(`${URL}/api/Event/`, {eventID: eventId}).then(res => {
             this.setState({event: res.data.data[0]})
+            console.log("org id: " + this.state.event.organizerID)
             this.getProfileInfo();
         }).catch(err => {
             console.log(err)
@@ -177,7 +187,7 @@ export class EventPage extends React.Component {
             const d = res.data.data[0];
             let fullName = d.firstName + ' ' + d.lastName;
             this.setState({organizerName: fullName})
-            
+            this.setRandomEmoji()
         }).catch(err => {
             console.log(err)
         });
@@ -201,7 +211,7 @@ export class EventPage extends React.Component {
                             <div className="card-header-info">
                                 <div className="event-page-layout">
                                     <div>
-                                        <h2 className="event-title">{this.state.event.eventName}</h2>
+                                    <h2 className="event-title">{this.state.event.eventName}</h2>
                                         <p className="event-subtitle">{this.state.event.eventDescription}</p>
                                         <div className="card-tags">
                                             { this.state.event.eventGenre ? <div className="">{this.state.event.eventGenre}</div> : <></>}
@@ -211,7 +221,7 @@ export class EventPage extends React.Component {
                                         </div>
                                         <Link className="author-wrap" to={"/profile/" + this.state.event.organizerID}>
                                             <div className="emoji-output emoji-small">
-                                            { emojies[Math.floor(Math.random()*emojies.length)] }
+                                            { this.state.emoji }
                                             </div>
                                             <span className="">{this.state.organizerName}</span>
                                         </Link>

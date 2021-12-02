@@ -7,15 +7,21 @@ import { URL } from '../utils/utils';
 
 const userRepository = new UserRepository();
 const user = userRepository.currentUser();
-let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","👺","🤡","⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏","🎱","🪀","🏓"];
 class EventCard extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
             organizerName: '',
+            userId: '',
+            emoji: '',
         }
     }
 
+    setRandomEmoji () {
+        let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","👺","🤡","⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏","🎱","🪀","🏓"]
+        let randomEmoji = emojies[this.props.event.organizerID % 23];
+        this.setState({emoji: randomEmoji});
+    }
 
 
     getProfileInfo = () => {
@@ -31,6 +37,7 @@ class EventCard extends React.Component {
 
     componentDidMount() {
         this.getProfileInfo();
+        this.setRandomEmoji();
     }
 
     render () {
@@ -47,7 +54,7 @@ class EventCard extends React.Component {
                         <h2 className="event-title">{this.props.event.eventName ? this.props.event.eventName : "Event name"}</h2>
                         <Link className="author-wrap" to={"/profile/" + this.props.event.organizerID}>
                             <div className="emoji-output emoji-small">
-                            { emojies[Math.floor(Math.random()*emojies.length)] }
+                            { this.state.emoji }
                             </div>
                             <span className="">{this.state.organizerName}</span>
                         </Link>

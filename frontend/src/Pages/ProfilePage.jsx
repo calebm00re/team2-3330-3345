@@ -38,10 +38,6 @@ class ProfilePage extends React.Component {
     }
 
     getProfileInfo = () => {
-        const pathname = window.location.pathname;
-        const userIdString = pathname.substring(9);
-        const userId = userIdString.match(/(\d+)/)[0];
-
         user = userRepository.currentUser();
         console.log(user.userID)
         axios.post(`${URL}/api/getUser`, {userID: userId}).then(res => {
