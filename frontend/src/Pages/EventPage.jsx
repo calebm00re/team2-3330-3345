@@ -7,6 +7,7 @@ import { URL } from '../utils/utils';
 
 const userRepository = new UserRepository();
 const user = userRepository.currentUser();
+const profileUser = "/home";
 let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","👺","🤡","⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏","🎱","🪀","🏓"];
 
 function EventControlCard (props) {
@@ -46,8 +47,15 @@ function EventTickets () {
     }
 
     const claimTicket = () => {
-        setTicket(ticket);
-        setTicketClaimed(true);
+        const pathname = window.location.pathname;
+        const eventId = pathname.substring(8);
+        axios.post(`${URL}/api/createTicket`, {userFK: user.userID, eventFK: eventId}).then(res => {
+            //const d = res.data.data;
+            //console.log(d);
+            window.location.href = profileUser;
+        }).catch(err => {
+            console.log(err)
+        });
     }
 
     return (
@@ -72,7 +80,7 @@ function EventTickets () {
                                 )
                             }
                         </select> */}
-                        <button className={"button no-text-wrap"} onClick={e => claimTicket(ticket)}>Claim Ticket</button>
+                        <button className={"button no-text-wrap"} onClick={e => claimTicket()}>Claim Ticket</button>
                     </div>
                 </>
             }
