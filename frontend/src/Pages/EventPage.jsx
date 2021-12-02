@@ -186,6 +186,7 @@ export class EventPage extends React.Component {
 
     componentDidMount () {
         this.loadEventDetails();
+        console.log(this.state.event.organizerID, user.userID)
     }
 
     render () {
@@ -193,7 +194,7 @@ export class EventPage extends React.Component {
             <>
                 <section className="browse">
                     <div className="container-sidebar">
-                        <a href="/browse" className="button button-secondary back-button">← Back</a>
+                        <a href="/browse" className="button button-secondary back-button">← Browse</a>
                         <article className="event-page">
                             {/* <img src={Logo} loading="lazy" width="30%" alt="Logo" className="event-img" /> */}
                     
@@ -208,7 +209,7 @@ export class EventPage extends React.Component {
                                             {/* { this.state.event.eventDate ? <div className="">{this.state.event.eventDate}</div> : <></>}
                                             { this.state.event.eventTime ? <div className="">{this.state.event.eventTime}</div> : <></>} */}
                                         </div>
-                                        <Link className="author-wrap" to="/profile/1">
+                                        <Link className="author-wrap" to={"/profile/" + this.state.event.organizerID}>
                                             <div className="emoji-output emoji-small">
                                             { emojies[Math.floor(Math.random()*emojies.length)] }
                                             </div>
@@ -219,7 +220,7 @@ export class EventPage extends React.Component {
                                         {
                                             this.state.event.organizerID == user.userID ?
                                             <>
-                                                <EventControlCard eventId={this.state.eventId} />
+                                                <EventControlCard eventId={this.state.event.eventID} />
                                             </>
                                             :
                                             <>
