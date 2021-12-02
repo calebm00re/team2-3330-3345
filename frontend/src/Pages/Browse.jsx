@@ -66,7 +66,7 @@ class BrowsePage extends React.Component {
                                 placeholder="Search for an event, category, or location..."
                                 onChange={ e => this.handleSearch(e.target.value) }
                             />
-                            <Link to="/post" className="button no-text-wrap">Post an event</Link>
+                            <Link to="/post" className="button no-text-wrap">Search</Link>
                         </div>
                         <div className="browse-grid">
                             {
