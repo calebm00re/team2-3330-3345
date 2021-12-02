@@ -16,13 +16,14 @@ class CreateEditEvent extends React.Component {
         eventDate: '',
         numTickets: '',
         eventLocation: '',
-        eventCategories: ''
+        eventGenre: '',
+        eventID: 0,
     }
 
 
     componentDidMount ()  {
 
-        if (true) {
+        if (this.props.isEditing) {
             this.getEventInfo();
         }
 
@@ -30,24 +31,56 @@ class CreateEditEvent extends React.Component {
     }
 
     getEventInfo = () => {
-        //get event info is isEditing and there is an event id
+        const pathname = window.location.pathname;
+        const eventIdString = pathname.substring(5);
+        const eventId = eventIdString.match(/(\d+)/)[0];
+        this.setState({eventId})
+
+        axios.post(`${URL}/api/Event`, { eventID: eventId}).then(res => {
+            const d = res.data.data[0];
+            console.log(d);
+            this.setState({
+                eventName: d.eventName ? d.eventName : '',
+                eventDescription: d.eventDescription ? d.eventDescription : '',
+                eventDate: d.eventDate ? d.eventDate : new Date(),
+                numTickets: d.numTickets ? d.numTickets : 10,
+                eventLocation: d.eventLocation ? d.eventLocation : '',
+                eventGenre: d.eventGenre ? d.eventGenre : '',
+            })
+        }).catch(err => {
+            console.log(err)
+        });
     }
 
-    editEvent = () => {
-        // put request to edit event details
+    handleFormSubmit = (e) => {
+        e.preventDefault();
+        if (this.props.isEditing) {
+            console.log("editing event...")
+            axios.put(`${URL}/api/editEvent`, { eventNameNew: this.state.eventName, eventLocationNew: this.state.eventLocation, eventGenreNew: this.state.eventGenre, eventDescriptionNew: this.state.eventGenre, eventDateNew: this.state.eventDate, eventTimeNew: null }).then(res => {
+                const d = res.data.data;
+                console.log(d);
+                window.location.href = "/events/" + this.state.eventId;
+            }).catch(err => {
+                console.log(err)
+            });
+        } else {
+            console.log("creating event...")
+            axios.post(`${URL}/api/createEvent`, {organizerID: user.userID, eventName: this.state.eventName, eventDescription: this.state.eventDescription,
+                eventDate: this.state.eventDate, numTickets: this.state.numTickets, eventLocation: this.state.eventLocation, eventGenre: this.state.eventGenre, organizerID: user.userID}).then(res => {
+                const d = res.data.data;
+                console.log(d);
+                window.location.href = "/browse";
+            }).catch(err => {
+                console.log(err)
+            });
+        }
+    }
+    editEvent = (e) => {
     }
 
     createEvent = (e) => {
         e.preventDefault();
         console.log("createEvent WAS CALLED LETS GOOO");
-        axios.post(`${URL}/api/createEvent`, {organizerID: user.userID, eventName: this.state.eventName, eventDescription: this.state.eventDescription,
-            eventDate: this.state.eventDate, numTickets: this.state.numTickets, eventLocation: this.state.eventLocation, eventCategories: this.state.eventCategories, organizerID: user.userID}).then(res => {
-            const d = res.data.data;
-            console.log(d);
-            window.location.href = profileUser;
-        }).catch(err => {
-            console.log(err)
-        });
     }
 
     render () {
@@ -57,29 +90,29 @@ class CreateEditEvent extends React.Component {
                     <div className="container-sidebar">
                         {
                             this.props.isEditing ?
-                            <a href={profileUser} className="button button-secondary back-button">← Back</a>
+                            <a href={"/events/" + this.state.eventId} className="button button-secondary back-button">← Back</a>
                             :
                             <></>
                         }
-                        <form name="loginForm" onSubmit={this.createEvent} className="form is-dark">
+                        <form name="loginForm" onSubmit={e => this.handleFormSubmit(e)} className="form is-dark">
                             <div className="form-header"><h2>{this.props.isEditing ? "Edit event details" : "Post an event"}</h2></div>
                             <div className="form-field">
                                 <label className="form-label" for="name">Name of event</label>
-                                <input class="form-input is-dark" type="text" id="name" name="name" placeholder="National Cherry Festival" 
+                                <input required class="form-input is-dark" type="text" id="name" name="name" placeholder="National Cherry Festival" 
                                     value={this.state.eventName}
                                     onChange={(e) => this.setState({eventName: e.target.value})}
                                 />
                             </div>
                             <div className="form-field">
                                 <label className="form-label" for="description">Description</label>
-                                <textarea class="form-input is-dark" type="text" id="description" name="description" placeholder="A fun filled day of cherry picking, pies, games, and so much more!" 
+                                <textarea required class="form-input is-dark" type="text" id="description" name="description" placeholder="A fun filled day of cherry picking, pies, games, and so much more!" 
                                     value={this.state.eventDescription}
                                     onChange={(e) => this.setState({eventDescription: e.target.value})}
                                 />
                             </div>
                             <div className="form-field">
                                 <label className="form-label" for="description">Date</label>
-                                <input class="form-input is-dark" type="date" id="date" name="date" min="2021-12-01"
+                                <input required class="form-input is-dark" type="date" id="date" name="date" min="2021-12-01"
                                     value={this.state.eventDate}
                                     onChange={(e) => this.setState({eventDate: e.target.value})}
                                 />
@@ -93,16 +126,16 @@ class CreateEditEvent extends React.Component {
                             </div>
                             <div className="form-field">
                                 <label className="form-label" for="location">Location</label>
-                                <input class="form-input is-dark" type="text" id="location" name="location" placeholder="Dallas, TX"
+                                <input required class="form-input is-dark" type="text" id="location" name="location" placeholder="Dallas, TX"
                                     value={this.state.eventLocation}
                                     onChange={(e) => this.setState({eventLocation: e.target.value})}
                                 />
                             </div>
                             <div className="form-field">
-                                <label className="form-label" for="categories">Categories</label>
-                                <input class="form-input is-dark" type="text" id="categories" name="categories" placeholder="Food, Culture, Festival"
-                                    value={this.state.eventCategories}
-                                    onChange={(e) => this.setState({eventCategories: e.target.value})}
+                                <label className="form-label" for="categories">Genre</label>
+                                <input required class="form-input is-dark" type="text" id="categories" name="categories" placeholder="Food, Culture, Festival"
+                                    value={this.state.eventGenre}
+                                    onChange={(e) => this.setState({eventGenre: e.target.value})}
                                 />
                             </div>
                             <div id="form-error">Invalid info</div>

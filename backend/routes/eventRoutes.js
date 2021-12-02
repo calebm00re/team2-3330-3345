@@ -149,12 +149,6 @@ router.post("/Events", async (req, res) => {
         logger.error("Problem obtaining MySQL connection", err);
         res.status(400).send("Problem obtaining MySQL connection");
       } else {
-        let eventNameOld = req.body['eventNameOld'];
-        let eventLocationOld = req.body['eventLocationOld'];
-        let eventGenreOld = req.body['eventGenreOld'];
-        let eventDescriptionOld = req.body['eventDescriptionOld'];
-        let eventDateOld = req.body['eventDateOld'];
-        let eventTimeOld = req.body['eventTimeOld'];
         let eventNameNew = req.body['eventNameNew'];
         let eventLocationNew = req.body['eventLocationNew'];
         let eventGenreNew = req.body['eventGenreNew'];
@@ -165,7 +159,7 @@ router.post("/Events", async (req, res) => {
     // if there is no issue obtaining a connection, execute query
         connection.query(
           "UPDATE events SET eventName = ?,eventLocation = ?,eventGenre = ?,eventDescription = ?,eventDate = ?,eventTime = ? WHERE eventName = ? && eventLocation = ? && eventGenre = ? && eventDescription = ? && eventDate = ? && eventTime = ?",
-          [eventNameNew,eventLocationNew,eventGenreNew,eventDescriptionNew,eventDateNew,eventTimeNew, eventNameOld,eventLocationOld,eventGenreOld,eventDescriptionOld,eventDateOld,eventTimeOld],
+          [eventNameNew,eventLocationNew,eventGenreNew,eventDescriptionNew,eventDateNew,eventTimeNew],
           (err, rows, fields) => {
             if (err) {
               logger.error("Error while editing event\n", err);
@@ -195,7 +189,7 @@ router.post("/Events", async (req, res) => {
       } else {
         let mine = req.body['organizerID'];
         connection.query(
-          "SELECT eventID FROM events WHERE organizerID = ?",mine,
+          "SELECT * FROM events WHERE organizerID = ?",mine,
           (err, rows, fields) => {
             if (err) {
               logger.error("Error while getting events\n", err);

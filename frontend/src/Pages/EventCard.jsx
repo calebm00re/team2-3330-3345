@@ -76,7 +76,7 @@ class EventCard extends React.Component {
                 }
                 
                 <div className="card-buttons">
-                    <Link to={"/events/" + this.props.event.eventID} className="button">Details</Link>
+                    <Link to={"/events/" + this.props.event.eventID} className="button">{!this.props.isTicket ? "Details" : "View Ticket"}</Link>
                 </div>
             </article>
         )

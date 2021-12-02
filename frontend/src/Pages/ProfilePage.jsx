@@ -13,6 +13,7 @@ class ProfilePage extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
+            events: {},
             isEditing: true,
             emoji: '',
             bio: '',
@@ -26,10 +27,20 @@ class ProfilePage extends React.Component {
         }
     }
 
+    getEvents () {
+        axios.post(`${URL}/api/ownedEvents`, {organizerID: user.userID}).then(res => {
+            this.setState({events: res.data.data})
+            console.log(this.state.events)
+        }).catch(err => {
+            console.log(err)
+        });
+
+    }
+
     getProfileInfo = () => {
         user = userRepository.currentUser();
         console.log(user.userID)
-        axios.post(`${URL}/api/getUser`, {userID: user.userID}).then(res => {
+        axios.post(`${URL}/api/getUser`, {userID: userId}).then(res => {
             const d = res.data.data;
             this.setState({userId: d[0].userID})
             this.setState({bio: d[0].bio})
@@ -43,9 +54,10 @@ class ProfilePage extends React.Component {
         });
     }
 
-    componentDidMount () {        
+    componentDidMount () {   
         this.getProfileInfo();
         this.setRandomEmoji();
+        this.getEvents();     
     }
 
     handleClick () {
@@ -72,21 +84,16 @@ class ProfilePage extends React.Component {
                         <p className="profile-bio">{this.state.bio} </p>
                         
                         <div className="content-section">
-                            <h2 className="section-heading">Events User has posted</h2>
-                            {/* <div className="browse-grid">
-                                {
-                                    [1,2,3,4].map((x, i) => <EventCard key={x} index={x} isTicket={false} /> )
-                                }
-                            </div> */}
+                            <h2 className="section-heading">Events User has posted:</h2>
+                            {<div className="browse-grid">
+                            {
+                                Object.keys(this.state.events).map((x, i) => (
+                                    <EventCard key={x} index={i} event={this.state.events[i]}/>
+                                ))
+                            }
+                        </div>}
                         </div>
                             <Link to="/editprofile" className="button top-right-button button-large">Edit Profile</Link>
-                        {
-                            // this.state.userId == user.userID ?
-                                
-                            // :
-                            // <>
-                            // </>
-                        }
                     </div>
                 </div>
             </section>
