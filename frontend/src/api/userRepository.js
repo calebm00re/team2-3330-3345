@@ -86,7 +86,7 @@ export class UserRepository {
   async register(firstname, lastname, username, pass) {
     const errors = { success: false };
     
-    const { status } = await axios.post(URL + "/api/createUser", {firstName: firstname, lastName: lastname, userName: username, psw: pass, dob: "none"});
+    const { data, status } = await axios.post(URL + "/api/createUser", {firstName: firstname, lastName: lastname, userName: username, psw: pass, dob: "none"});
 
     if (status <= 201) {
       errors.success = true;
@@ -96,6 +96,7 @@ export class UserRepository {
           userName: username,
           firstName: firstname,
           lastName: lastname,
+          userID : data.data.insertId
         })
       );
     }
@@ -136,21 +137,4 @@ export class UserRepository {
       return [data, errors];
     }
   
-
-//   /**
-//    * Get an array of all users
-//    * @returns {Promise<[Object, Object]>} - Data, error tuple
-//    */
-//   async getAllUsers() {
-//     const errors = { success: false };
-//     const { data, status } = await axios.get(
-//       URL + "/api/manager/getAllUsers",
-//       {}
-//     );
-
-//     if (status >= 201) errors.request = "Bad Request";
-//     else errors.success = true;
-
-//     return [data, errors];
-//   }
 }
