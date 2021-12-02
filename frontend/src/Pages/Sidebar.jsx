@@ -33,7 +33,7 @@ export const Sidebar = (props) =>
                     <></>
                 }
             </MenuItem>
-            <MenuItem icon={<EmojiIcon emoji="🤠"/>}>
+            <MenuItem icon={<EmojiIcon emoji="🎁"/>}>
                 Post
                 <Link to="/post" />
                 {
@@ -53,7 +53,7 @@ export const Sidebar = (props) =>
                     </>)
                 }
             </SubMenu> */}
-            <MenuItem icon={<EmojiIcon emoji="🤸"/>}>
+            <MenuItem icon={<EmojiIcon emoji="🤠"/>}>
                 Profile
                 <Link to={"/profile/" + user.userID} />
                 {
@@ -64,7 +64,7 @@ export const Sidebar = (props) =>
                 }
             </MenuItem>
             <div className="sidebar-spacer" />
-            <MenuItem icon={<EmojiIcon emoji="🐢"/>}>
+            <MenuItem icon={<EmojiIcon emoji="🚪"/>}>
                 Logout
                 <Link to="/" />
             </MenuItem>
