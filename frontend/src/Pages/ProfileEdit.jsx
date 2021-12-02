@@ -7,7 +7,7 @@ import { UserRepository } from "../api/userRepository";
 
 // history = useHistory();
 const userRepository = new UserRepository();
-var user = userRepository.currentUser();
+const user = userRepository.currentUser();
 const profileUser = "/profile/" + user.userID
 class ProfileEdit extends React.Component {
     constructor (props) {
@@ -23,7 +23,6 @@ class ProfileEdit extends React.Component {
     }
 
     getProfileInfo = () => {
-        user = userRepository.currentUser();
         axios.post(`${URL}/api/getUser`, {userID: user.userID}).then(res => {
             const d = res.data.data;
             this.setState({bio: d[0].bio})
