@@ -189,7 +189,7 @@ router.post("/Events", async (req, res) => {
       } else {
         let mine = req.body['organizerID'];
         connection.query(
-          "SELECT eventID FROM events WHERE organizerID = ?",mine,
+          "SELECT * FROM events WHERE organizerID = ?",mine,
           (err, rows, fields) => {
             if (err) {
               logger.error("Error while getting events\n", err);

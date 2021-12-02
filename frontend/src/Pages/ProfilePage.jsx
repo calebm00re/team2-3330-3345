@@ -13,6 +13,7 @@ class ProfilePage extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
+            events: {},
             isEditing: true,
             emoji: '',
             bio: '',
@@ -24,6 +25,16 @@ class ProfilePage extends React.Component {
             userId: 0,
             User: null
         }
+    }
+
+    getEvents () {
+        axios.post(`${URL}/api/ownedEvents`, {organizerID: user.userID}).then(res => {
+            this.setState({events: res.data.data})
+            console.log(this.state.events)
+        }).catch(err => {
+            console.log(err)
+        });
+
     }
 
     getProfileInfo = () => {
@@ -47,9 +58,10 @@ class ProfilePage extends React.Component {
         });
     }
 
-    componentDidMount () {        
+    componentDidMount () {   
         this.getProfileInfo();
         this.setRandomEmoji();
+        this.getEvents();     
     }
 
     handleClick () {
@@ -74,6 +86,17 @@ class ProfilePage extends React.Component {
                             <h1 className="profile-name">{this.state.first} {this.state.last}</h1>
                         </div>
                         <p className="profile-bio">{this.state.bio} </p>
+                        
+                        <div className="content-section">
+                            <h2 className="section-heading">Events User has posted:</h2>
+                            {<div className="browse-grid">
+                            {
+                                Object.keys(this.state.events).map((x, i) => (
+                                    <EventCard key={x} index={i} event={this.state.events[i]}/>
+                                ))
+                            }
+                        </div>}
+                        </div>
                             <Link to="/editprofile" className="button top-right-button button-large">Edit Profile</Link>
                     </div>
                 </div>
