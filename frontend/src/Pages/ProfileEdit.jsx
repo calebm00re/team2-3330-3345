@@ -65,7 +65,7 @@ class ProfileEdit extends React.Component {
         return (
             <section className="profile-page" onClick={ e => this.handleClick() } >
                 <div className="container-sidebar">
-                <a href={"/profile/" + 1} className="button button-secondary back-button no-text-wrap">Back to profile</a>
+                <a href={profileUser} className="button button-secondary back-button no-text-wrap">Back to profile</a>
                 <form name="loginForm" className="form is-dark">
                         <div>
                             <h1 className="mb-2">Edit profile</h1>
