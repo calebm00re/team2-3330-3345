@@ -58,7 +58,7 @@ class BrowsePage extends React.Component {
                     {
                         !this.state.showPage && <>
                         
-                        <div className="browse-controls">
+                        {/* <div className="browse-controls">
                             <input
                                 type="search"
                                 className="browse-input"
@@ -67,7 +67,7 @@ class BrowsePage extends React.Component {
                                 onChange={ e => this.handleSearch(e.target.value) }
                             />
                             <Link to="/post" className="button no-text-wrap">Search</Link>
-                        </div>
+                        </div> */}
                         <div className="browse-grid">
                             {
                                 Object.keys(this.state.events).map((x, i) => (
