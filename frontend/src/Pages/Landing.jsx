@@ -46,7 +46,6 @@ function Landing () {
                     </div>
                     <div className="landing-visual">
                         <div className="event-carousel">
-                            {/* <EventReviews /> */}
                         </div>
                     </div>
                 </div>

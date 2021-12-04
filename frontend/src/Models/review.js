@@ -1,6 +1,6 @@
 
 
-
+//review class
 export class Review {
     constructor() {
         this.eventId = '';
