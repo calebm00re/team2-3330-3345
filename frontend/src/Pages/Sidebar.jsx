@@ -43,16 +43,6 @@ export const Sidebar = (props) =>
                     <></>
                 }
             </MenuItem>
-            {/* <SubMenu title="Your events" icon={<EmojiIcon emoji="🗓️"/>}>
-                {
-                    [1,2,3,4].map((x,i) => <>
-                        <MenuItem key={i}>
-                            Event {x}
-                            <Link to={ "/events/" + x} />
-                        </MenuItem>
-                    </>)
-                }
-            </SubMenu> */}
             <MenuItem icon={<EmojiIcon emoji="🤸"/>}>
                 Profile
                 <Link to={"/profile/" + user.userID} />

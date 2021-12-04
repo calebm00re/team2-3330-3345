@@ -3,11 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { URL } from '../utils/utils';
 import { UserRepository } from "../api/userRepository";
-// import { useHistory } from 'react-router-dom';
 
-// history = useHistory();
 const userRepository = new UserRepository();
-// const user = userRepository.currentUser();
 var user;
 var profileUser; 
 class ProfileEdit extends React.Component {
@@ -65,10 +62,6 @@ class ProfileEdit extends React.Component {
         this.setRandomEmoji();
     }
 
-    handleClick () {
-        // this.props.onCardClick(this.props.index)
-    }
-
     setRandomEmoji () {
         let emojies = ["🤓","😎","🥸","🤩","🥳","🤠","😈","👿","👹","👺","🤡","⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏","🎱","🪀","🏓"]
         let randomEmoji = emojies[user.userID % 23];
@@ -77,7 +70,7 @@ class ProfileEdit extends React.Component {
 
     render () {
         return (
-            <section className="profile-page" onClick={ e => this.handleClick() } >
+            <section className="profile-page">
                 <div className="container-sidebar">
                 <a href={profileUser} className="button button-secondary back-button no-text-wrap">Back to profile</a>
                 <form name="loginForm" className="form is-dark">
@@ -89,9 +82,6 @@ class ProfileEdit extends React.Component {
                             <div className="emoji-output">
                                 { this.state.emoji }
                             </div>
-                            {/* <div className="button button-secondary emoji-button" onClick={() => this.setRandomEmoji()}>
-                                Generate random
-                            </div> */}
                         </div>
                         <div className="double-form-field-wrap">
                             <div className="form-field">

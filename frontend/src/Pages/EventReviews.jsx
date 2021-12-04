@@ -6,9 +6,6 @@ function ReviewForm () {
     const [reviewBody, setReviewBody] = useState([]);
     const [reviewRating, setReviewRating] = useState([]);
 
-    const handleSubmit = () => {
-    }
-
     return (
         <>
             <div className="review-card">

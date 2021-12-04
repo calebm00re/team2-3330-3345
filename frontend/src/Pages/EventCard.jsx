@@ -1,5 +1,5 @@
 import Logo from '../Assets/landing-image.svg'
-import React, {useState} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import { UserRepository } from '../api/userRepository';
 import axios from 'axios';
@@ -67,8 +67,6 @@ class EventCard extends React.Component {
                         <div className="card-tags">
                             { this.props.event.eventGenre ? <div className="">{this.props.event.eventGenre}</div> : <></>}
                             { this.props.event.eventLocation ? <div className="">{this.props.event.eventLocation}</div> : <></>}
-                            {/* { this.props.event.eventDate ? <div className="">{this.props.event.eventDate}</div> : <></>} */}
-                            {/* { this.props.event.eventTime ? <div className="">{this.props.event.eventTime}</div> : <></>} */}
                         </div>
                     </>
                     :
