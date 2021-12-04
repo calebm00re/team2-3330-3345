@@ -1,7 +1,7 @@
 import '../Styles/Landing.css';
 import LandingImage from '../Assets/landing-image.svg'
 import Typing from 'react-typing-animation';
-import EventCard from './EventCard';
+//import EventCard from './EventCard';
 // import EventReviews from './EventReviews';
 import AppScreenshot from '../Assets/landing-img.png';
 

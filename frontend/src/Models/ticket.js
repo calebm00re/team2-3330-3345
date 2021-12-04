@@ -1,5 +1,5 @@
 
-
+//ticket class
 export class Ticket {
     constructor(id, eventId, userId, eventId) {
         this.id = id;
